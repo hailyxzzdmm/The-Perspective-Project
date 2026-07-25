@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Perspective Project | Dialogue Initiative & Knowledge Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-crimson: #A51C30; /* Harvard Crimson Accent */
+            --crimson-hover: #821424;
+            --bg-light: #F8F9FA;
+            --surface-white: #FFFFFF;
+            --text-main: #1C1E21;
+            --text-muted: #5A6065;
+            --border-color: #E2E8F0;
+            --accent-gold: #C5A059;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            background-color: var(--primary-crimson);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary-crimson);
+        }
+
+        .lang-switch {
+            display: flex;
+            background: #EDF2F7;
+            padding: 3px;
+            border-radius: 20px;
+            gap: 2px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .lang-btn.active {
+            background-color: var(--surface-white);
+            color: var(--primary-crimson);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        /* Notice Banner Kasten */
+        .status-banner {
+            background-color: #FFF5F5;
+            border-bottom: 1px solid #FEB2B2;
+            padding: 14px 2rem;
+            text-align: center;
+        }
+
+        .status-banner-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            background-color: var(--primary-crimson);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #742A2A;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1A1D20 0%, #2D3748 100%);
+            color: white;
+            padding: 80px 2rem 100px 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(165, 28, 48, 0.25);
+            border: 1px solid var(--primary-crimson);
+            color: #FFB3BA;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1.2;
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+        }
+
+        .hero p {
+            font-family: 'Newsreader', serif;
+            font-size: 21px;
+            color: #E2E8F0;
+            max-width: 780px;
+            margin: 0 auto 40px auto;
+            font-style: italic;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            max-width: 850px;
+            margin: 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-item h3 {
+            font-size: 30px;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+        }
+
+        .stat-item p {
+            font-size: 12px;
+            color: #A0AEC0;
+            font-style: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Container & Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Mission & Roadmap Section */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .phase-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .phase-card.active-phase {
+            border-left: 6px solid var(--primary-crimson);
+        }
+
+        .phase-card.future-phase {
+            border-left: 6px solid var(--accent-gold);
+        }
+
+        .phase-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .phase-card.active-phase .phase-tag {
+            background: #FFF5F5;
+            color: var(--primary-crimson);
+        }
+
+        .phase-card.future-phase .phase-tag {
+            background: #FEFCBF;
+            color: #744210;
+        }
+
+        .phase-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .phase-card p {
+            font-size: 15px;
+            color: #4A5568;
+            line-height: 1.7;
+        }
+
+        /* Filter Controls */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: var(--surface-white);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-crimson);
+            color: white;
+            border-color: var(--primary-crimson);
+            box-shadow: 0 4px 12px rgba(165, 28, 48, 0.2);
+        }
+
+        /* Topics Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .topic-card {
+            background: var(--surface-white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-color: #CBD5E0;
+        }
+
+        .topic-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .category-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: #EDF2F7;
+            color: #4A5568;
+        }
+
+        .session-num {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .topic-card h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .questions-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .questions-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .questions-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-crimson);
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1A1D20;
+            color: #A0AEC0;
+            padding: 60px 2rem 30px 2rem;
+            margin-top: 80px;
+            border-top: 1px solid #2D3748;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h2 {
+            font-family: 'Cinzel', serif;
+            color: white;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            max-width: 380px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #2D3748;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 18px; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .topics-grid { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; height: auto; padding: 15px 0; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-mark">P</div>
+                <div class="logo-text">The Perspective Project</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#vision" id="nav-vision">Vision & Phasen</a></li>
+                    <li><a href="#curriculum" id="nav-syllabus">Syllabus & Archiv</a></li>
+                </ul>
+            </nav>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-de" onclick="setLanguage('de')">DE</button>
+                <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Status Banner -->
+    <div class="status-banner">
+        <div class="status-banner-content">
+            <span class="status-badge" id="banner-badge">Aktuell in Bearbeitung</span>
+            <span class="status-text" id="banner-text">Das Projekt startet am 14. September 2026. Aktuell befindet sich das Projekt in der Vorbereitung.</span>
+        </div>
+    </div>
+
+    <section class="hero">
+        <span class="hero-badge" id="hero-badge">Schülerinitiative & Digitales Archiv</span>
+        <h1 id="hero-title">Erforschung von Mensch, Ethik, Technologie & Zukunft</h1>
+        <p id="hero-subtitle">Vom interaktiven Dialog im Schulfoyer zu einer langfristigen Wissensplattform für kritische Lebensfragen und Perspektiven.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <h3>30+</h3>
+                <p id="stat-1">Schul-Workshops</p>
+            </div>
+            <div class="stat-item">
+                <h3>2 Jahre</h3>
+                <p id="stat-2">Foyer-Initiative</p>
+            </div>
+            <div class="stat-item">
+                <h3>Infinity</h3>
+                <p id="stat-3">Digitales Archiv</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <section id="vision">
+            <div class="section-header">
+                <h2 id="vision-title">Das Projektmodell</h2>
+                <p id="vision-subtitle">Ein zweistufiger Ansatz: Erst die lokale Debatte vor Ort, dann die globale, nachhaltige Aufarbeitung.</p>
+            </div>
+
+            <div class="roadmap-grid">
+                <div class="phase-card active-phase">
+                    <span class="phase-tag" id="phase1-tag">Phase 1: 2026 – 2028</span>
+                    <h3 id="phase1-title">Schul-Foyer Initiative</h3>
+                    <p id="phase1-desc">
+                        Alle 3 Wochen verwandelt sich das Schulfoyer in einen philosophischen und gesellschaftlichen Resonanzraum. Schülerinnen und Schüler diskutieren spontan über komplexe Fragen zu Psychologie, Werten, Technologie und Ethik – gefördert durch evidenzbasierte Anstöße.
+                    </p>
+                </div>
+
+                <div class="phase-card future-phase">
+                    <span class="phase-tag" id="phase2-tag">Phase 2: Post-Graduation & Zukunft</span>
+                    <h3 id="phase2-title">Perspektiven & Lebensweisheiten Archiv</h3>
+                    <p id="phase2-desc">
+                        Nach dem Schulabschluss entwickelt sich diese Webseite zu einem dauerhaften digitalen Wissensarchiv. Ebenso werden weiterhin komplexe Probleme von mir analysiert und die Lösungen für eine breitere Öffentlichkeit zugänglich gemacht.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="curriculum">
+            <div class="section-header">
+                <h2 id="syllabus-title">Das Themen-Syllabus</h2>
+                <p id="syllabus-subtitle">Kuratierte Ausgaben, die sowohl im Schulfoyer diskutiert als auch langfristig digital aufbereitet werden.</p>
+            </div>
+
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="filterTopics('all')" id="filter-all">Alle Themen</button>
+                <button class="filter-btn" onclick="filterTopics('psychology')" id="filter-psych">Psychologie & Denken</button>
+                <button class="filter-btn" onclick="filterTopics('society')" id="filter-soc">Gesellschaft & Demokratie</button>
+                <button class="filter-btn" onclick="filterTopics('tech')" id="filter-tech">Technologie & Zukunft</button>
+                <button class="filter-btn" onclick="filterTopics('ethics')" id="filter-eth">Ethik & Moral</button>
+                <button class="filter-btn" onclick="filterTopics('meta')" id="filter-meta">Meta & Führung</button>
+            </div>
+
+            <div class="topics-grid" id="topics-grid">
+                <!-- Topics dynamically rendered -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>The Perspective Project</h2>
+                <p id="footer-desc">Eine Initiative zur Förderung intellektueller Neugier, sokratischen Dialogs und langfristiger Reflexion über menschliche Werte.</p>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 12px;" id="footer-loc-title">Initiative & Archiv</h4>
+                <p id="footer-loc-desc">Gestartet im Schulfoyer | Nachhaltig fortgeführt als digitales Perspektiven-Archiv.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="year"></span> The Perspective Project | Created for College Admissions & Lifelong Reflection</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        let currentLang = 'de';
+        let currentFilter = 'all';
+
+        // Topic Database in DE and EN
+        const topicsData = [
+            {
+                id: 1,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                session: 'EDITION 01',
+                titleDE: 'Warum haben Menschen unterschiedliche Meinungen?',
+                titleEN: 'Why Do People Hold Divergent Opinions?',
+                qDE: [
+                    'Warum entstehen Konflikte bei unterschiedlichen Ansichten?',
+                    'Wie kann man trotz verschiedener Meinungen respektvoll miteinander diskutieren?'
+                ],
+                qEN: [
+                    'How do conflicts arise from differing perspectives?',
+                    'How can we engage in respectful discourse despite opposing views?'
+                ]
+            },
+            {
+                id: 2,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                session: 'EDITION 02',
+                titleDE: 'Die unsichtbaren Vorurteile in uns allen',
+                titleEN: 'The Unconscious Biases Within Us All',
+                qDE: [
+                    'Kann man Vorurteile haben, ohne ein schlechter Mensch zu sein?',
+                    'Wie beeinflussen unbewusste Denkmuster unsere alltäglichen Entscheidungen?'
+                ],
+                qEN: [
+                    'Can an individual hold biases without moral deficiency?',
+                    'How do subconscious cognitive shortcuts shape high-stakes decision making?'
+                ]
+            },
+            {
+                id: 3,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                session: 'EDITION 03',
+                titleDE: 'Warum ändern Menschen ihre Meinung so selten?',
+                titleEN: 'The Psychology of Opinion Rigidity',
+                qDE: [
+                    'Warum fühlen sich Überzeugungen oft wie ein Teil der eigenen Identität an?',
+                    'Wann zeugt es von intellektueller Stärke, seine Meinung zu revidieren?'
+                ],
+                qEN: [
+                    'Why do political/social beliefs fuse with personal identity?',
+                    'When does changing one\'s mind reflect intellectual maturity rather than weakness?'
+                ]
+            },
+            {
+                id: 6,
+                cat: 'society',
+                catDE: 'Gesellschaft & Demokratie',
+                catEN: 'Society & Pluralism',
+                session: 'EDITION 04',
+                titleDE: 'Pluralismus: Zusammenhalt trotz konträrer Werte',
+                titleEN: 'Cohesion Amidst Plurality of Core Values',
+                qDE: [
+                    'Muss eine funktionierende Gesellschaft universelle Werte teilen?',
+                    'Wie viel fundamentale Verschiedenheit hält eine Demokratie aus?'
+                ],
+                qEN: [
+                    'Must a stable society maintain a baseline of shared moral values?',
+                    'What level of value pluralism can a democratic state sustain before fracturing?'
+                ]
+            },
+            {
+                id: 11,
+                cat: 'tech',
+                catDE: 'Technologie & Zukunft',
+                catEN: 'Technology & AI',
+                session: 'EDITION 05',
+                titleDE: 'KI: Ergänzung oder Kognitive Verarmung?',
+                titleEN: 'Artificial Intelligence: Amplification or Atrophy?',
+                qDE: [
+                    'Welche kognitiven Fähigkeiten verkümmern durch KI-Nutzung?',
+                    'Welche neuen menschlichen Meta-Kompetenzen gewinnen an Bedeutung?'
+                ],
+                qEN: [
+                    'Which intellectual capabilities atrophy when offloaded to AI systems?',
+                    'What novel human meta-skills emerge as vital in an automated economy?'
+                ]
+            }
+        ];
+
+        // UI Translation Dictionary
+        const uiText = {
+            de: {
+                bannerBadge: 'Aktuell in Bearbeitung',
+                bannerText: 'Das Projekt startet am 14. September 2026. Aktuell befindet sich das Projekt in der Vorbereitung.',
+                badge: 'Schülerinitiative & Digitales Archiv',
+                title: 'Erforschung von Mensch, Ethik, Technologie & Zukunft',
+                subtitle: 'Vom interaktiven Dialog im Schulfoyer zu einer langfristigen Wissensplattform für kritische Lebensfragen und Perspektiven.',
+                stat1: 'Schul-Workshops',
+                stat2: 'Foyer-Initiative',
+                stat3: 'Digitales Archiv',
+                navVision: 'Vision & Phasen',
+                navSyllabus: 'Syllabus & Archiv',
+                visionTitle: 'Das Projektmodell',
+                visionSubtitle: 'Ein zweistufiger Ansatz: Erst die lokale Debatte vor Ort, dann die globale, nachhaltige Aufarbeitung.',
+                phase1Tag: 'Phase 1: 2026 – 2028',
+                phase1Title: 'Schul-Foyer Initiative',
+                phase1Desc: 'Alle 3 Wochen verwandelt sich das Schulfoyer in einen philosophischen und gesellschaftlichen Resonanzraum. Schülerinnen und Schüler diskutieren spontan über komplexe Fragen zu Psychologie, Werten, Technologie und Ethik – gefördert durch evidenzbasierte Anstöße.',
+                phase2Tag: 'Phase 2: Post-Graduation & Zukunft',
+                phase2Title: 'Perspektiven & Lebensweisheiten Archiv',
+                phase2Desc: 'Nach dem Schulabschluss entwickelt sich diese Webseite zu einem dauerhaften digitalen Wissensarchiv. Ebenso werden weiterhin komplexe Probleme von mir analysiert und die Lösungen für eine breitere Öffentlichkeit zugänglich gemacht.',
+                syllabusTitle: 'Das Themen-Syllabus',
+                syllabusSubtitle: 'Kuratierte Ausgaben, die sowohl im Schulfoyer diskutiert als auch langfristig digital aufbereitet werden.',
+                filterAll: 'Alle Themen',
+                filterPsych: 'Psychologie & Denken',
+                filterSoc: 'Gesellschaft & Demokratie',
+                filterTech: 'Technologie & Zukunft',
+                filterEth: 'Ethik & Moral',
+                filterMeta: 'Meta & Führung',
+                footerDesc: 'Eine Initiative zur Förderung intellektueller Neugier, sokratischen Dialogs und langfristiger Reflexion über menschliche Werte.',
+                footerLocTitle: 'Initiative & Archiv',
+                footerLocDesc: 'Gestartet im Schulfoyer | Nachhaltig fortgeführt als digitales Perspektiven-Archiv.'
+            },
+            en: {
+                bannerBadge: 'Currently in Progress',
+                bannerText: 'The project starts on September 14, 2026. The project is currently in preparation.',
+                badge: 'Student Initiative & Digital Archive',
+                title: 'Exploring Humanity, Ethics, Technology & The Future',
+                subtitle: 'From interactive discussions in the school foyer to a long-term knowledge platform for critical life questions and perspectives.',
+                stat1: 'School Workshops',
+                stat2: 'Foyer Initiative',
+                stat3: 'Digital Archive',
+                navVision: 'Vision & Phases',
+                navSyllabus: 'Syllabus & Archive',
+                visionTitle: 'The Project Model',
+                visionSubtitle: 'A two-stage approach: Local debate on-site first, followed by global, sustainable documentation.',
+                phase1Tag: 'Phase 1: 2026 – 2028',
+                phase1Title: 'School Foyer Initiative',
+                phase1Desc: 'Every 3 weeks, the school foyer transforms into a philosophical and social space of discussion. Students spontaneously debate complex questions regarding psychology, values, technology, and ethics – sparked by evidence-based prompts.',
+                phase2Tag: 'Phase 2: Post-Graduation & Future',
+                phase2Title: 'Perspectives & Wisdom Archive',
+                phase2Desc: 'After graduation, this website will transition into a permanent digital knowledge archive, continuing to analyze complex problems and publish solutions for a broader audience.',
+                syllabusTitle: 'The Topic Syllabus',
+                syllabusSubtitle: 'Curated editions discussed live in the school foyer and digitally preserved long-term.',
+                filterAll: 'All Topics',
+                filterPsych: 'Psychology & Cognition',
+                filterSoc: 'Society & Pluralism',
+                filterTech: 'Technology & AI',
+                filterEth: 'Ethics & Philosophy',
+                filterMeta: 'Leadership & Meta',
+                footerDesc: 'An initiative fostering intellectual curiosity, Socratic dialogue, and long-term reflection on human values.',
+                footerLocTitle: 'Initiative & Archive',
+                footerLocDesc: 'Launched in the school foyer | Sustained long-term as a digital perspectives archive.'
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Toggle active buttons
+            document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            // Apply translations
+            const t = uiText[lang];
+            document.getElementById('banner-badge').innerText = t.bannerBadge;
+            document.getElementById('banner-text').innerText = t.bannerText;
+            document.getElementById('hero-badge').innerText = t.badge;
+            document.getElementById('hero-title').innerText = t.title;
+            document.getElementById('hero-subtitle').innerText = t.subtitle;
+            document.getElementById('stat-1').innerText = t.stat1;
+            document.getElementById('stat-2').innerText = t.stat2;
+            document.getElementById('stat-3').innerText = t.stat3;
+            document.getElementById('nav-vision').innerText = t.navVision;
+            document.getElementById('nav-syllabus').innerText = t.navSyllabus;
+            document.getElementById('vision-title').innerText = t.visionTitle;
+            document.getElementById('vision-subtitle').innerText = t.visionSubtitle;
+            document.getElementById('phase1-tag').innerText = t.phase1Tag;
+            document.getElementById('phase1-title').innerText = t.phase1Title;
+            document.getElementById('phase1-desc').innerText = t.phase1Desc;
+            document.getElementById('phase2-tag').innerText = t.phase2Tag;
+            document.getElementById('phase2-title').innerText = t.phase2Title;
+            document.getElementById('phase2-desc').innerText = t.phase2Desc;
+            document.getElementById('syllabus-title').innerText = t.syllabusTitle;
+            document.getElementById('syllabus-subtitle').innerText = t.syllabusSubtitle;
+            document.getElementById('filter-all').innerText = t.filterAll;
+            document.getElementById('filter-psych').innerText = t.filterPsych;
+            document.getElementById('filter-soc').innerText = t.filterSoc;
+            document.getElementById('filter-tech').innerText = t.filterTech;
+            document.getElementById('filter-eth').innerText = t.filterEth;
+            document.getElementById('filter-meta').innerText = t.filterMeta;
+            document.getElementById('footer-desc').innerText = t.footerDesc;
+            document.getElementById('footer-loc-title').innerText = t.footerLocTitle;
+            document.getElementById('footer-loc-desc').innerText = t.footerLocDesc;
+
+            renderTopics();
+        }
+
+        function filterTopics(category) {
+            currentFilter = category;
+            
+            // Update active filter button state
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            renderTopics();
+        }
+
+        function renderTopics() {
+            const grid = document.getElementById('topics-grid');
+            grid.innerHTML = '';
+
+            const filteredData = currentFilter === 'all' 
+                ? topicsData 
+                : topicsData.filter(item => item.cat === currentFilter);
+
+            filteredData.forEach(topic => {
+                const isDE = currentLang === 'de';
+                const catText = isDE ? topic.catDE : topic.catEN;
+                const titleText = isDE ? topic.titleDE : topic.titleEN;
+                const questions = isDE ? topic.qDE : topic.qEN;
+
+                const cardHtml = `
+                    <div class="topic-card">
+                        <div>
+                            <div class="topic-meta">
+                                <span class="category-tag">${catText}</span>
+                                <span class="session-num">${topic.session}</span>
+                            </div>
+                            <h3>${titleText}</h3>
+                            <ul class="questions-list">
+                                ${questions.map(q => `<li>${q}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        // Initialize rendering
+        renderTopics();
+    </script>
+</body>
+</html>
+
+
+
