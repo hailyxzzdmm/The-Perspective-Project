@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-crimson: #A51C30; /* Harvard Crimson Accent */
+            --primary-crimson: #A51C30;
             --crimson-hover: #821424;
             --bg-light: #F8F9FA;
             --surface-white: #FFFFFF;
@@ -571,16 +571,16 @@
         
         <div class="hero-stats">
             <div class="stat-item">
-                <h3>30+</h3>
-                <p id="stat-1">Schul-Workshops</p>
+                <h3 id="stat-1-val">25 Themen</h3>
+                <p id="stat-1-lbl">Schul-Workshops</p>
             </div>
             <div class="stat-item">
-                <h3>2 Jahre</h3>
-                <p id="stat-2">Foyer-Initiative</p>
+                <h3 id="stat-2-val">2 Jahre</h3>
+                <p id="stat-2-lbl">Foyer-Initiative</p>
             </div>
             <div class="stat-item">
-                <h3>Infinity</h3>
-                <p id="stat-3">Digitales Archiv</p>
+                <h3 id="stat-3-val">Infinity</h3>
+                <p id="stat-3-lbl">Digitales Archiv</p>
             </div>
         </div>
     </section>
@@ -661,13 +661,13 @@
                 </div>
             </div>
             <div class="impressum-disclaimer" id="imp-disclaimer">
-                <p><strong>Haftung für Inhalte:</strong> Die Inhalte meiner Seite wurde mit größter Sorgfalt erstellt. Für die Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Sollten Fehler oder unvollständige Informationen auffallen, bemühe ich mich, diese zeitnah zu korrigieren..</p>
+                <p id="imp-disclaimer-text"><strong>Haftung für Inhalte:</strong> Die Inhalte meiner Seite wurden mit größter Sorgfalt erstellt. Für die Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Sollten Fehler oder unvollständige Informationen auffallen, bemühe ich mich, diese zeitnah zu korrigieren.</p>
             </div>
 
             <!-- Datenschutz Hinweis -->
             <div class="privacy-box">
                 <h4 id="privacy-title">Datenschutz & Anonymität</h4>
-                <p id="privacy-desc">Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht. </p>
+                <p id="privacy-desc">Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht.</p>
             </div>
         </div>
 
@@ -682,96 +682,308 @@
         let currentLang = 'de';
         let currentFilter = 'all';
 
-        // Topic Database in DE and EN
+        // Topic Database - All 25 Wochen / 5 Editionen mit voll-zweisprachigen Daten
         const topicsData = [
+            // EDITION 01: Psychologie & Denken
             {
                 id: 1,
                 cat: 'psychology',
                 catDE: 'Psychologie & Denken',
                 catEN: 'Psychology & Cognition',
-                session: 'EDITION 01',
+                sessionDE: 'EDITION 01 | WOCHE 1–3',
+                sessionEN: 'EDITION 01 | WEEK 1–3',
                 titleDE: 'Warum haben Menschen unterschiedliche Meinungen?',
                 titleEN: 'Why Do People Hold Divergent Opinions?',
-                qDE: [
-                    'Warum entstehen Konflikte bei unterschiedlichen Ansichten?',
-                    'Wie kann man trotz verschiedener Meinungen respektvoll miteinander diskutieren?'
-                ],
-                qEN: [
-                    'How do conflicts arise from differing perspectives?',
-                    'How can we engage in respectful discourse despite opposing views?'
-                ]
+                qDE: ['Hauptfrage: Warum können zwei Menschen dieselben Informationen haben und trotzdem etwas anderes glauben?'],
+                qEN: ['Main question: How can two individuals hold identical information yet arrive at completely different beliefs?']
             },
             {
                 id: 2,
                 cat: 'psychology',
                 catDE: 'Psychologie & Denken',
                 catEN: 'Psychology & Cognition',
-                session: 'EDITION 02',
-                titleDE: 'Die unsichtbaren Vorurteile in uns allen',
-                titleEN: 'The Unconscious Biases Within Us All',
-                qDE: [
-                    'Kann man Vorurteile haben, ohne ein schlechter Mensch zu sein?',
-                    'Wie beeinflussen unbewusste Denkmuster unsere alltäglichen Entscheidungen?'
-                ],
-                qEN: [
-                    'Can an individual hold biases without moral deficiency?',
-                    'How do subconscious cognitive shortcuts shape high-stakes decision making?'
-                ]
+                sessionDE: 'EDITION 01 | WOCHE 4–6',
+                sessionEN: 'EDITION 01 | WEEK 4–6',
+                titleDE: 'Warum verteidigen Menschen ihre Meinungen?',
+                titleEN: 'Why Do People Defend Their Opinions?',
+                qDE: ['Hauptfrage: Warum halten Menschen an Überzeugungen fest, selbst wenn sie neue Informationen bekommen?'],
+                qEN: ['Main question: Why do people cling to convictions even when presented with new counter-evidence?']
             },
             {
                 id: 3,
                 cat: 'psychology',
                 catDE: 'Psychologie & Denken',
                 catEN: 'Psychology & Cognition',
-                session: 'EDITION 03',
-                titleDE: 'Warum ändern Menschen ihre Meinung so selten?',
-                titleEN: 'The Psychology of Opinion Rigidity',
-                qDE: [
-                    'Warum fühlen sich Überzeugungen oft wie ein Teil der eigenen Identität an?',
-                    'Wann zeugt es von intellektueller Stärke, seine Meinung zu revidieren?'
-                ],
-                qEN: [
-                    'Why do political/social beliefs fuse with personal identity?',
-                    'When does changing one\'s mind reflect intellectual maturity rather than weakness?'
-                ]
+                sessionDE: 'EDITION 01 | WOCHE 7–9',
+                sessionEN: 'EDITION 01 | WEEK 7–9',
+                titleDE: 'Wie entstehen Vorurteile und warum haben wir sie?',
+                titleEN: 'How Do Biases Arise and Why Do We Have Them?',
+                qDE: ['Hauptfrage: Sind Vorurteile immer bewusst oder entstehen sie manchmal unbemerkt?'],
+                qEN: ['Main question: Are prejudices always conscious, or do they often form undetected?']
             },
             {
                 id: 4,
-                cat: 'society',
-                catDE: 'Gesellschaft & Demokratie',
-                catEN: 'Society & Pluralism',
-                session: 'EDITION 04',
-                titleDE: 'Pluralismus: Zusammenhalt trotz konträrer Werte',
-                titleEN: 'Cohesion Amidst Plurality of Core Values',
-                qDE: [
-                    'Muss eine funktionierende Gesellschaft universelle Werte teilen?',
-                    'Wie viel fundamentale Verschiedenheit hält eine Demokratie aus?'
-                ],
-                qEN: [
-                    'Must a stable society maintain a baseline of shared moral values?',
-                    'What level of value pluralism can a democratic state sustain before fracturing?'
-                ]
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                sessionDE: 'EDITION 01 | WOCHE 10–12',
+                sessionEN: 'EDITION 01 | WEEK 10–12',
+                titleDE: 'Warum fällt es Menschen schwer, ihre Meinung zu ändern?',
+                titleEN: 'Why Is Changing One\'s Mind So Difficult?',
+                qDE: ['Hauptfrage: Ist es eine Schwäche oder eine Stärke, seine Meinung zu ändern?'],
+                qEN: ['Main question: Is revising one\'s stance a sign of weakness or intellectual strength?']
             },
             {
                 id: 5,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                sessionDE: 'EDITION 01 | WOCHE 13–15',
+                sessionEN: 'EDITION 01 | WEEK 13–15',
+                titleDE: 'Wie beeinflussen Emotionen unser Denken?',
+                titleEN: 'How Do Emotions Shape Our Thinking?',
+                qDE: ['Hauptfrage: Entscheiden wir wirklich rational oder beeinflussen Gefühle unsere Entscheidungen?'],
+                qEN: ['Main question: Do we truly decide rationally, or do emotions drive our choices?']
+            },
+            {
+                id: 6,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                sessionDE: 'EDITION 01 | WOCHE 16–18',
+                sessionEN: 'EDITION 01 | WEEK 16–18',
+                titleDE: 'Sehen wir die Wahrheit oder nur unsere eigene Perspektive?',
+                titleEN: 'Do We See Truth or Only Our Own Perspective?',
+                qDE: ['Hauptfrage: Kann es verschiedene Wahrheiten geben?'],
+                qEN: ['Main question: Can multiple subjective truths exist simultaneously?']
+            },
+            {
+                id: 7,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                sessionDE: 'EDITION 01 | WOCHE 19–21',
+                sessionEN: 'EDITION 01 | WEEK 19–21',
+                titleDE: 'Warum folgen Menschen Gruppen und Trends?',
+                titleEN: 'Why Do People Conform to Groups & Trends?',
+                qDE: ['Hauptfrage: Warum passen Menschen ihre Meinung manchmal an andere an?'],
+                qEN: ['Main question: Why do individuals adjust their views to align with social consensus?']
+            },
+            {
+                id: 8,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                sessionDE: 'EDITION 01 | WOCHE 22–24',
+                sessionEN: 'EDITION 01 | WEEK 22–24',
+                titleDE: 'Wie beeinflussen Erfahrungen unsere Persönlichkeit und unser Denken?',
+                titleEN: 'How Do Experiences Mold Personality and Thought?',
+                qDE: ['Hauptfrage: Wie formen Familie, Kultur und Umfeld unsere Sicht auf die Welt?'],
+                qEN: ['Main question: How do family, culture, and social environment shape worldviews?']
+            },
+            {
+                id: 9,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                sessionDE: 'EDITION 01 | WOCHE 25–27',
+                sessionEN: 'EDITION 01 | WEEK 25–27',
+                titleDE: 'Warum entstehen Konflikte zwischen Menschen?',
+                titleEN: 'Why Do Interpersonal Conflicts Arise?',
+                qDE: ['Hauptfrage: Entstehen Konflikte durch Unterschiede oder durch fehlendes Verständnis?'],
+                qEN: ['Main question: Are conflicts caused by fundamental differences or lack of empathy?']
+            },
+            {
+                id: 10,
+                cat: 'psychology',
+                catDE: 'Psychologie & Denken',
+                catEN: 'Psychology & Cognition',
+                sessionDE: 'EDITION 01 | WOCHE 28–30',
+                sessionEN: 'EDITION 01 | WEEK 28–30',
+                titleDE: 'Wie kann man respektvoll widersprechen?',
+                titleEN: 'How Can We Disagree Respectfully?',
+                qDE: ['Hauptfrage: Wie können Menschen anderer Meinung sein, ohne sich gegenseitig abzuwerten?'],
+                qEN: ['Main question: How can people hold opposing viewpoints without devaluing one another?']
+            },
+
+            // EDITION 02: Gesellschaft & Demokratie
+            {
+                id: 11,
+                cat: 'society',
+                catDE: 'Gesellschaft & Demokratie',
+                catEN: 'Society & Democracy',
+                sessionDE: 'EDITION 02 | WOCHE 31–33',
+                sessionEN: 'EDITION 02 | WEEK 31–33',
+                titleDE: 'Wie kann eine Gesellschaft mit unterschiedlichen Meinungen funktionieren?',
+                titleEN: 'How Can a Society Function Amidst Plurality?',
+                qDE: ['Hauptfrage: Wie lässt sich gesellschaftlicher Zusammenhalt trotz tiefer Spaltungen bewahren?'],
+                qEN: ['Main question: How can social cohesion be maintained despite deep ideological divides?']
+            },
+            {
+                id: 12,
+                cat: 'society',
+                catDE: 'Gesellschaft & Demokratie',
+                catEN: 'Society & Democracy',
+                sessionDE: 'EDITION 02 | WOCHE 34–36',
+                sessionEN: 'EDITION 02 | WEEK 34–36',
+                titleDE: 'Warum wird öffentliche Diskussion immer schwieriger?',
+                titleEN: 'Why Is Public Discourse Becoming More Polarization-Prone?',
+                qDE: ['Hauptfrage: Welche Faktoren erschweren den lösungsorientierten Dialog in der Öffentlichkeit?'],
+                qEN: ['Main question: What structural barriers hinder constructive debate in modern public spheres?']
+            },
+
+            // EDITION 03: Technologie & Zukunft
+            {
+                id: 13,
                 cat: 'tech',
                 catDE: 'Technologie & Zukunft',
-                catEN: 'Technology & AI',
-                session: 'EDITION 05',
-                titleDE: 'KI: Ergänzung oder Kognitive Verarmung?',
-                titleEN: 'Artificial Intelligence: Amplification or Atrophy?',
-                qDE: [
-                    'Welche kognitiven Fähigkeiten verkümmern durch KI-Nutzung?',
-                    'Welche neuen menschlichen Meta-Kompetenzen gewinnen an Bedeutung?'
-                ],
-                qEN: [
-                    'Which intellectual capabilities atrophy when offloaded to AI systems?',
-                    'What novel human meta-skills emerge as vital in an automated economy?'
-                ]
+                catEN: 'Technology & Future',
+                sessionDE: 'EDITION 03 | WOCHE 37–39',
+                sessionEN: 'EDITION 03 | WEEK 37–39',
+                titleDE: 'Wie beeinflusst künstliche Intelligenz unser Denken?',
+                titleEN: 'How Does Artificial Intelligence Affect Human Cognition?',
+                qDE: ['Hauptfrage: Verändert die Auslagerung von Denkprozessen an KI unsere kognitiven Fähigkeiten?'],
+                qEN: ['Main question: Does offloading mental tasks to AI reshape our intrinsic cognitive faculties?']
+            },
+            {
+                id: 14,
+                cat: 'tech',
+                catDE: 'Technologie & Zukunft',
+                catEN: 'Technology & Future',
+                sessionDE: 'EDITION 03 | WOCHE 40–42',
+                sessionEN: 'EDITION 03 | WEEK 40–42',
+                titleDE: 'Verändern soziale Medien unsere Meinungen?',
+                titleEN: 'Do Social Media Platforms Alter Our Beliefs?',
+                qDE: ['Hauptfrage: Welchen Einfluss haben Algorithmen und Echo-Kammern auf das Weltbild?'],
+                qEN: ['Main question: How do algorithms and filter bubbles engineer societal worldviews?']
+            },
+            {
+                id: 15,
+                cat: 'tech',
+                catDE: 'Technologie & Zukunft',
+                catEN: 'Technology & Future',
+                sessionDE: 'EDITION 03 | WOCHE 43–45',
+                sessionEN: 'EDITION 03 | WEEK 43–45',
+                titleDE: 'Kann Technologie neutral sein?',
+                titleEN: 'Can Technology Ever Be Truly Neutral?',
+                qDE: ['Hauptfrage: Spiegeln technologische Werkzeuge die Werte ihrer Erfinder wider?'],
+                qEN: ['Main question: Do technological tools inherently carry the value systems of their creators?']
+            },
+            {
+                id: 16,
+                cat: 'tech',
+                catDE: 'Technologie & Zukunft',
+                catEN: 'Technology & Future',
+                sessionDE: 'EDITION 03 | WOCHE 46–48',
+                sessionEN: 'EDITION 03 | WEEK 46–48',
+                titleDE: 'Wer trägt Verantwortung für künstliche Intelligenz?',
+                titleEN: 'Who Holds Responsibility for Artificial Intelligence?',
+                qDE: ['Hauptfrage: Wie teilen sich Entwickler, Nutzer und Staaten die ethische Haftung?'],
+                qEN: ['Main question: How is ethical liability shared among developers, users, and regulatory states?']
+            },
+            {
+                id: 17,
+                cat: 'tech',
+                catDE: 'Technologie & Zukunft',
+                catEN: 'Technology & Future',
+                sessionDE: 'EDITION 03 | WOCHE 49–51',
+                sessionEN: 'EDITION 03 | WEEK 49–51',
+                titleDE: 'Was bleibt menschlich in einer Welt voller Technologie?',
+                titleEN: 'What Remains Uniquely Human in a Tech-Driven World?',
+                qDE: ['Hauptfrage: Welche Eigenschaften definieren den Menschen, wenn Maschinen immer intelligenter werden?'],
+                qEN: ['Main question: What essential human characteristics persist when automated systems excel?']
+            },
+
+            // EDITION 04: Ethik & Moral
+            {
+                id: 18,
+                cat: 'ethics',
+                catDE: 'Ethik & Moral',
+                catEN: 'Ethics & Morality',
+                sessionDE: 'EDITION 04 | WOCHE 52–54',
+                sessionEN: 'EDITION 04 | WEEK 52–54',
+                titleDE: 'Was bedeutet es, ein guter Mensch zu sein?',
+                titleEN: 'What Does It Mean to Be a Good Person?',
+                qDE: ['Hauptfrage: Basiert Moral auf universellen Regeln, Handlungen oder innerer Haltung?'],
+                qEN: ['Main question: Is morality defined by universal laws, outcomes, or intrinsic virtue?']
+            },
+            {
+                id: 19,
+                cat: 'ethics',
+                catDE: 'Ethik & Moral',
+                catEN: 'Ethics & Morality',
+                sessionDE: 'EDITION 04 | WOCHE 55–57',
+                sessionEN: 'EDITION 04 | WEEK 55–57',
+                titleDE: 'Ist eine gute Absicht wichtiger als ein gutes Ergebnis?',
+                titleEN: 'Is Good Intent More Important Than a Good Outcome?',
+                qDE: ['Hauptfrage: Beurteilen wir die Moral einer Tat nach ihren Beweggründen oder den Konsequenzen?'],
+                qEN: ['Main question: Should actions be evaluated based on underlying intent or ultimate consequences?']
+            },
+            {
+                id: 20,
+                cat: 'ethics',
+                catDE: 'Ethik & Moral',
+                catEN: 'Ethics & Morality',
+                sessionDE: 'EDITION 04 | WOCHE 58–60',
+                sessionEN: 'EDITION 04 | WEEK 58–60',
+                titleDE: 'Soll jeder eine zweite Chance bekommen?',
+                titleEN: 'Should Everyone Deserve a Second Chance?',
+                qDE: ['Hauptfrage: Wo liegen die Grenzen der Vergebung und gesellschaftlichen Reintegration?'],
+                qEN: ['Main question: What are the ethical limits of forgiveness and social reintegration?']
+            },
+
+            // EDITION 05: Meta & Führung
+            {
+                id: 21,
+                cat: 'meta',
+                catDE: 'Meta & Führung',
+                catEN: 'Meta & Leadership',
+                sessionDE: 'EDITION 05 | WOCHE 61–63',
+                sessionEN: 'EDITION 05 | WEEK 61–63',
+                titleDE: 'Was macht einen guten Anführer aus?',
+                titleEN: 'What Defines Exceptional Leadership?',
+                qDE: ['Hauptfrage: Ist Führung eine Frage von Autorität, Empathie oder Vision?'],
+                qEN: ['Main question: Does effective leadership rely on authority, empathy, or vision?']
+            },
+            {
+                id: 22,
+                cat: 'meta',
+                catDE: 'Meta & Führung',
+                catEN: 'Meta & Leadership',
+                sessionDE: 'EDITION 05 | WOCHE 64–66',
+                sessionEN: 'EDITION 05 | WEEK 64–66',
+                titleDE: 'Warum vertrauen Menschen bestimmten Personen?',
+                titleEN: 'Why Do People Trust Certain Individuals?',
+                qDE: ['Hauptfrage: Wie entsteht Vertrauen und wie unterscheidet man Glaubwürdigkeit von Manipulation?'],
+                qEN: ['Main question: How is trust built, and how can credibility be distinguished from charisma?']
+            },
+            {
+                id: 23,
+                cat: 'meta',
+                catDE: 'Meta & Führung',
+                catEN: 'Meta & Leadership',
+                sessionDE: 'EDITION 05 | WOCHE 67–69',
+                sessionEN: 'EDITION 05 | WEEK 67–69',
+                titleDE: 'Wie können junge Menschen Veränderung schaffen?',
+                titleEN: 'How Can Youth Drive Systemic Change?',
+                qDE: ['Hauptfrage: Welche Hebel haben Jugendliche, um gesellschaftlichen Wandel aktiv zu gestalten?'],
+                qEN: ['Main question: What leverage points do young people possess to impact social structures?']
+            },
+            {
+                id: 24,
+                cat: 'meta',
+                catDE: 'Meta & Führung',
+                catEN: 'Meta & Leadership',
+                sessionDE: 'EDITION 05 | WOCHE 70–72',
+                sessionEN: 'EDITION 05 | WEEK 70–72',
+                titleDE: 'Was macht eine starke Gemeinschaft aus?',
+                titleEN: 'What Forms the Foundation of a Strong Community?',
+                qDE: ['Hauptfrage: Wie verbindet man individuelle Freiheit mit Verpflichtung gegenüber der Gruppe?'],
+                qEN: ['Main question: How can individual autonomy be balanced with communal duty?']
             }
         ];
 
-        // UI Translation Dictionary
+        // Dictionary for Language Switching
         const uiText = {
             de: {
                 bannerBadge: 'Aktuell in Bearbeitung',
@@ -779,9 +991,12 @@
                 badge: 'Schülerinitiative & Digitales Archiv',
                 title: 'Erforschung von Mensch, Ethik, Technologie & Zukunft',
                 subtitle: 'Vom interaktiven Dialog im Schulfoyer zu einer langfristigen Wissensplattform für kritische Lebensfragen und Perspektiven.',
-                stat1: 'Schul-Workshops',
-                stat2: 'Foyer-Initiative',
-                stat3: 'Digitales Archiv',
+                stat1Val: '25 Themen',
+                stat1Lbl: 'Schul-Workshops',
+                stat2Val: '2 Jahre',
+                stat2Lbl: 'Foyer-Initiative',
+                stat3Val: 'Infinity',
+                stat3Lbl: 'Digitales Archiv',
                 navVision: 'Vision & Phasen',
                 navSyllabus: 'Syllabus & Archiv',
                 navImpressum: 'Impressum',
@@ -807,67 +1022,73 @@
                 impTitle: 'Impressum',
                 impHeadResp: 'Angaben gemäß § 5 DDG:',
                 impHeadContact: 'Kontakt:',
-                impDisclaimer: '<p><strong>Haftung für Inhalte:</strong> Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>',
+                impDisclaimerText: '<strong>Haftung für Inhalte:</strong> Die Inhalte meiner Seite wurden mit größter Sorgfalt erstellt. Für die Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Sollten Fehler oder unvollständige Informationen auffallen, bemühe ich mich, diese zeitnah zu korrigieren.',
                 privacyTitle: 'Datenschutz & Anonymität',
-                privacyDesc: 'Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht. Es werden keine personenbezogenen Daten ohne ausdrückliche Einwilligung gespeichert.'
+                privacyDesc: 'Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht.'
             },
             en: {
                 bannerBadge: 'Currently in Progress',
-                bannerText: 'The project starts on September 14, 2026. The project is currently in preparation.',
+                bannerText: 'The project will launch on September 14, 2026. It is currently under active preparation.',
                 badge: 'Student Initiative & Digital Archive',
-                title: 'Exploring Humanity, Ethics, Technology & The Future',
-                subtitle: 'From interactive discussions in the school foyer to a long-term knowledge platform for critical life questions and perspectives.',
-                stat1: 'School Workshops',
-                stat2: 'Foyer Initiative',
-                stat3: 'Digital Archive',
+                title: 'Exploring Humanity, Ethics, Technology & the Future',
+                subtitle: 'From interactive discussions in the school foyer to a lasting digital repository for critical philosophical inquiries.',
+                stat1Val: '25 Topics',
+                stat1Lbl: 'School Workshops',
+                stat2Val: '2 Years',
+                stat2Lbl: 'Foyer Initiative',
+                stat3Val: 'Infinity',
+                stat3Lbl: 'Digital Archive',
                 navVision: 'Vision & Phases',
                 navSyllabus: 'Syllabus & Archive',
                 navImpressum: 'Legal Notice',
-                visionTitle: 'The Project Model',
-                visionSubtitle: 'A two-stage approach: Local debate on-site first, followed by global, sustainable documentation.',
+                visionTitle: 'The Project Framework',
+                visionSubtitle: 'A two-stage approach: Local discussions on campus followed by long-term digital documentation.',
                 phase1Tag: 'Phase 1: 2026 – 2028',
-                phase1Title: 'School Foyer Initiative',
-                phase1Desc: 'Every 3 weeks, the school foyer transforms into a philosophical and social space of discussion. Students spontaneously debate complex questions regarding psychology, values, technology, and ethics – sparked by evidence-based prompts.',
-                phase2Tag: 'Phase 2: Post-Graduation & Future',
-                phase2Title: 'Perspectives & Wisdom Archive',
-                phase2Desc: 'After graduation, this website will transition into a permanent digital knowledge archive, continuing to analyze complex problems and publish solutions for a broader audience.',
-                syllabusTitle: 'The Topic Syllabus',
-                syllabusSubtitle: 'Curated editions discussed live in the school foyer and digitally preserved long-term.',
+                phase1Title: 'Foyer Dialogue Initiative',
+                phase1Desc: 'Every 3 weeks, the school foyer turns into a hub for intellectual debate. Students spontaneously explore complex questions on psychology, ethics, and technology guided by evidence-backed prompts.',
+                phase2Tag: 'Phase 2: Post-Graduation & Beyond',
+                phase2Title: 'Wisdom & Perspective Archive',
+                phase2Desc: 'Following graduation, this web application evolves into an enduring knowledge archive. Complex societal issues will continue to be analyzed and made accessible for a wider audience.',
+                syllabusTitle: 'Curriculum & Syllabus',
+                syllabusSubtitle: 'Curated editions designed for real-world debates and subsequent digital publication.',
                 filterAll: 'All Topics',
                 filterPsych: 'Psychology & Cognition',
-                filterSoc: 'Society & Pluralism',
-                filterTech: 'Technology & AI',
-                filterEth: 'Ethics & Philosophy',
-                filterMeta: 'Leadership & Meta',
-                footerDesc: 'An initiative fostering intellectual curiosity, Socratic dialogue, and long-term reflection on human values.',
+                filterSoc: 'Society & Democracy',
+                filterTech: 'Technology & Future',
+                filterEth: 'Ethics & Morality',
+                filterMeta: 'Meta & Leadership',
+                footerDesc: 'An initiative dedicated to cultivating intellectual curiosity, Socratic dialogue, and deep reflection on human values.',
                 footerLocTitle: 'Initiative & Archive',
-                footerLocDesc: 'Launched in the school foyer | Sustained long-term as a digital perspectives archive.',
-                impTitle: 'Legal Notice / Impressum',
+                footerLocDesc: 'Launched on campus | Continued as a permanent digital archive.',
+                impTitle: 'Legal Notice (Impressum)',
                 impHeadResp: 'Information according to § 5 DDG:',
                 impHeadContact: 'Contact:',
-                impDisclaimer: '<p><strong>Limitation of Liability:</strong> The contents of this website have been created with the utmost care. However, we cannot guarantee the accuracy, completeness, or topicality of the content provided.</p>',
+                impDisclaimerText: '<strong>Liability for Content:</strong> Content has been created with utmost care. However, no liability can be assumed for completeness or timeliness. Corrections will be promptly applied upon notification.',
                 privacyTitle: 'Data Privacy & Anonymity',
-                privacyDesc: 'Responses from surveys or discussions are processed and published exclusively in anonymized form. No personal data is stored without explicit consent.'
+                privacyDesc: 'Survey and discussion responses are evaluated and published exclusively in anonymous form.'
             }
         };
 
         function setLanguage(lang) {
             currentLang = lang;
-            
-            // Toggle active buttons
             document.getElementById('btn-de').classList.toggle('active', lang === 'de');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 
-            // Apply translations
             const t = uiText[lang];
             document.getElementById('banner-badge').innerText = t.bannerBadge;
             document.getElementById('banner-text').innerText = t.bannerText;
             document.getElementById('hero-badge').innerText = t.badge;
             document.getElementById('hero-title').innerText = t.title;
             document.getElementById('hero-subtitle').innerText = t.subtitle;
-            document.getElementById('stat-1').innerText = t.stat1;
-            document.getElementById('stat-2').innerText = t.stat2;
-            document.getElementById('stat-3').innerText = t.stat3;
+            
+            // Hero Stats Dynamic Switch
+            document.getElementById('stat-1-val').innerText = t.stat1Val;
+            document.getElementById('stat-1-lbl').innerText = t.stat1Lbl;
+            document.getElementById('stat-2-val').innerText = t.stat2Val;
+            document.getElementById('stat-2-lbl').innerText = t.stat2Lbl;
+            document.getElementById('stat-3-val').innerText = t.stat3Val;
+            document.getElementById('stat-3-lbl').innerText = t.stat3Lbl;
+
             document.getElementById('nav-vision').innerText = t.navVision;
             document.getElementById('nav-syllabus').innerText = t.navSyllabus;
             document.getElementById('nav-impressum').innerText = t.navImpressum;
@@ -893,7 +1114,7 @@
             document.getElementById('imp-title').innerText = t.impTitle;
             document.getElementById('imp-head-responsible').innerText = t.impHeadResp;
             document.getElementById('imp-head-contact').innerText = t.impHeadContact;
-            document.getElementById('imp-disclaimer').innerHTML = t.impDisclaimer;
+            document.getElementById('imp-disclaimer-text').innerHTML = t.impDisclaimerText;
             document.getElementById('privacy-title').innerText = t.privacyTitle;
             document.getElementById('privacy-desc').innerText = t.privacyDesc;
 
@@ -902,14 +1123,9 @@
 
         function filterTopics(e, category) {
             currentFilter = category;
-            
-            // Update active filter button state
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            if(e && e.target) {
-                e.target.classList.add('active');
-            }
-
+            e.target.classList.add('active');
             renderTopics();
         }
 
@@ -917,40 +1133,41 @@
             const grid = document.getElementById('topics-grid');
             grid.innerHTML = '';
 
-            const filteredData = currentFilter === 'all' 
+            const filtered = currentFilter === 'all' 
                 ? topicsData 
                 : topicsData.filter(item => item.cat === currentFilter);
 
-            filteredData.forEach(topic => {
-                const isDE = currentLang === 'de';
-                const catText = isDE ? topic.catDE : topic.catEN;
-                const titleText = isDE ? topic.titleDE : topic.titleEN;
-                const questions = isDE ? topic.qDE : topic.qEN;
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'topic-card';
+
+                const catLabel = currentLang === 'de' ? item.catDE : item.catEN;
+                const sessionLabel = currentLang === 'de' ? item.sessionDE : item.sessionEN;
+                const title = currentLang === 'de' ? item.titleDE : item.titleEN;
+                const questions = currentLang === 'de' ? item.qDE : item.qEN;
 
                 let qListHtml = '';
                 questions.forEach(q => {
                     qListHtml += `<li>${q}</li>`;
                 });
 
-                const cardHtml = `
-                    <div class="topic-card">
-                        <div>
-                            <div class="topic-meta">
-                                <span class="category-tag">${catText}</span>
-                                <span class="session-num">${topic.session}</span>
-                            </div>
-                            <h3>${titleText}</h3>
-                            <ul class="questions-list">
-                                ${qListHtml}
-                            </ul>
+                card.innerHTML = `
+                    <div>
+                        <div class="topic-meta">
+                            <span class="category-tag">${catLabel}</span>
+                            <span class="session-num">${sessionLabel}</span>
                         </div>
+                        <h3>${title}</h3>
+                        <ul class="questions-list">
+                            ${qListHtml}
+                        </ul>
                     </div>
                 `;
-                grid.innerHTML += cardHtml;
+                grid.appendChild(card);
             });
         }
 
-        // Initial rendering on page load
+        // Initial render
         renderTopics();
     </script>
 </body>
