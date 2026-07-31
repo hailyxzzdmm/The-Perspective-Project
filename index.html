@@ -1,1174 +1,823 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Perspective Project | Dialogue Initiative & Knowledge Archive</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-crimson: #A51C30;
-            --crimson-hover: #821424;
-            --bg-light: #F8F9FA;
-            --surface-white: #FFFFFF;
-            --text-main: #1C1E21;
-            --text-muted: #5A6065;
-            --border-color: #E2E8F0;
-            --accent-gold: #C5A059;
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+    <title>The Perspective Project</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+<!-- Hier bindest du deine neue externe CSS-Datei ein: -->
+<link rel="stylesheet" href="style.css">
 
-        /* Header Navigation */
-        header {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0 2rem;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 75px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-mark {
-            width: 38px;
-            height: 38px;
-            background-color: var(--primary-crimson);
-            color: white;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .logo-text {
-            font-family: 'Cinzel', serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: 0.5px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-            align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-
-        nav a:hover {
-            color: var(--primary-crimson);
-        }
-
-        .lang-switch {
-            display: flex;
-            background: #EDF2F7;
-            padding: 3px;
-            border-radius: 20px;
-            gap: 2px;
-        }
-
-        .lang-btn {
-            border: none;
-            background: transparent;
-            padding: 6px 14px;
-            border-radius: 16px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        .lang-btn.active {
-            background-color: var(--surface-white);
-            color: var(--primary-crimson);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-        }
-
-        /* Notice Banner Kasten */
-        .status-banner {
-            background-color: #FFF5F5;
-            border-bottom: 1px solid #FEB2B2;
-            padding: 14px 2rem;
-            text-align: center;
-        }
-
-        .status-banner-content {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .status-badge {
-            background-color: var(--primary-crimson);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 3px 10px;
-            border-radius: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .status-text {
-            font-size: 14px;
-            color: #742A2A;
-            font-weight: 500;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #1A1D20 0%, #2D3748 100%);
-            color: white;
-            padding: 80px 2rem 100px 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(165, 28, 48, 0.25);
-            border: 1px solid var(--primary-crimson);
-            color: #FFB3BA;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-        }
-
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 46px;
-            font-weight: 700;
-            line-height: 1.2;
-            max-width: 900px;
-            margin: 0 auto 20px auto;
-        }
-
-        .hero p {
-            font-family: 'Newsreader', serif;
-            font-size: 21px;
-            color: #E2E8F0;
-            max-width: 780px;
-            margin: 0 auto 40px auto;
-            font-style: italic;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            max-width: 850px;
-            margin: 0 auto;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .stat-item h3 {
-            font-size: 30px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-        }
-
-        .stat-item p {
-            font-size: 12px;
-            color: #A0AEC0;
-            font-style: normal;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
-        }
-
-        /* Container & Grid */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 32px;
-            color: var(--text-main);
-            margin-bottom: 12px;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 16px;
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        /* Mission & Roadmap Section */
-        .roadmap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .phase-card {
-            background: var(--surface-white);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--border-color);
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .phase-card.active-phase {
-            border-left: 6px solid var(--primary-crimson);
-        }
-
-        .phase-card.future-phase {
-            border-left: 6px solid var(--accent-gold);
-        }
-
-        .phase-tag {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-bottom: 16px;
-            display: inline-block;
-        }
-
-        .phase-card.active-phase .phase-tag {
-            background: #FFF5F5;
-            color: var(--primary-crimson);
-        }
-
-        .phase-card.future-phase .phase-tag {
-            background: #FEFCBF;
-            color: #744210;
-        }
-
-        .phase-card h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            margin-bottom: 16px;
-            color: var(--text-main);
-        }
-
-        .phase-card p {
-            font-size: 15px;
-            color: #4A5568;
-            line-height: 1.7;
-        }
-
-        /* Filter Controls */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-
-        .filter-btn {
-            background: var(--surface-white);
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--primary-crimson);
-            color: white;
-            border-color: var(--primary-crimson);
-            box-shadow: 0 4px 12px rgba(165, 28, 48, 0.2);
-        }
-
-        /* Topics Grid */
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .topic-card {
-            background: var(--surface-white);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: var(--transition);
-        }
-
-        .topic-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border-color: #CBD5E0;
-        }
-
-        .topic-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .category-tag {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            background: #EDF2F7;
-            color: #4A5568;
-        }
-
-        .session-num {
-            font-family: 'Cinzel', serif;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--accent-gold);
-        }
-
-        .topic-card h3 {
-            font-size: 19px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--text-main);
-            line-height: 1.4;
-        }
-
-        .questions-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .questions-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .questions-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--primary-crimson);
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 14px;
-        }
-
-        /* Footer & Impressum */
-        footer {
-            background: #1A1D20;
-            color: #A0AEC0;
-            padding: 60px 2rem 30px 2rem;
-            margin-top: 80px;
-            border-top: 1px solid #2D3748;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-brand h2 {
-            font-family: 'Cinzel', serif;
-            color: white;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .footer-brand p {
-            font-size: 14px;
-            max-width: 380px;
-        }
-
-        .impressum-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            border-top: 1px solid #2D3748;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .impressum-section h3 {
-            color: white;
-            font-size: 16px;
-            margin-bottom: 12px;
-            font-family: 'Cinzel', serif;
-        }
-
-        .impressum-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .impressum-box strong {
-            color: #E2E8F0;
-        }
-
-        .impressum-box a {
-            color: var(--accent-gold);
-            text-decoration: none;
-        }
-
-        .impressum-box a:hover {
-            text-decoration: underline;
-        }
-
-        .impressum-disclaimer {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed #2D3748;
-        }
-
-        .privacy-box {
-            margin-top: 20px;
-            background: rgba(255,255,255,0.03);
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-gold);
-        }
-
-        .privacy-box h4 {
-            color: white;
-            font-size: 14px;
-            margin-bottom: 6px;
-            font-family: 'Cinzel', serif;
-        }
-
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
-            font-size: 13px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 18px; }
-            .hero-stats { flex-direction: column; gap: 20px; }
-            .topics-grid { grid-template-columns: 1fr; }
-            .nav-container { flex-direction: column; height: auto; padding: 15px 0; gap: 15px; }
-        }
-    </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-mark">P</div>
-                <div class="logo-text">The Perspective Project</div>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="#vision" id="nav-vision">Vision & Phasen</a></li>
-                    <li><a href="#curriculum" id="nav-syllabus">Syllabus & Archiv</a></li>
-                    <li><a href="#impressum" id="nav-impressum">Impressum</a></li>
-                </ul>
-            </nav>
-            <div class="lang-switch">
-                <button class="lang-btn active" id="btn-de" onclick="setLanguage('de')">DE</button>
-                <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
-            </div>
+<header>
+    <div class="nav-container">
+        <a href="#" class="logo">
+            <div class="logo-mark">P</div>
+            <div class="logo-text">The Perspective Project</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#vision" id="nav-vision">Vision & Phasen</a></li>
+                <li><a href="#curriculum" id="nav-syllabus">Syllabus & Archiv</a></li>
+                <li><a href="#impressum" id="nav-impressum">Impressum</a></li>
+            </ul>
+        </nav>
+        <div class="lang-switch">
+            <button class="lang-btn active" id="btn-de" onclick="setLanguage('de')">DE</button>
+            <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- Top Status Banner -->
-    <div class="status-banner">
-        <div class="status-banner-content">
-            <span class="status-badge" id="banner-badge">Aktuell in Bearbeitung</span>
-            <span class="status-text" id="banner-text">Das Projekt startet am 14. September 2026. Aktuell befindet sich das Projekt in der Vorbereitung.</span>
+<div class="status-banner">
+    <div class="status-banner-content">
+        <span class="status-badge" id="banner-badge">Aktuell in Bearbeitung</span>
+        <span class="status-text" id="banner-text">Das Projekt startet vorraussichtlich im September 2026. Aktuell befindet sich das Projekt in der Vorbereitung.</span>
+    </div>
+</div>
+
+<section class="hero">
+    <span class="hero-badge" id="hero-badge">Schülerinitiative & Digitales Archiv</span>
+    <h1 id="hero-title">Erforschung von Mensch, Ethik, Technologie & Zukunft</h1>
+    <p id="hero-subtitle">Vom interaktiven Dialog im Schulfoyer zu einer langfristigen Wissensplattform für kritische Lebensfragen und Perspektiven.</p>
+
+<div class="hero-stats">
+    <div class="stat-item">
+        <h3 id="stat-1-val">25 Themen in der Schule</h3>
+        <p id="stat-1-lbl">Schul-Workshops</p>
+    </div>
+    <div class="stat-item">
+        <h3 id="stat-2-val">2 Jahre vor Ort</h3>
+        <p id="stat-2-lbl">Foyer-Initiative</p>
+    </div>
+    <div class="stat-item">
+        <h3 id="stat-3-val">Infinity</h3>
+        <p id="stat-3-lbl">Digitales Archiv</p>
+    </div>
+</div>
+
+</section>
+
+<main class="container">
+
+<section id="vision">
+    <div class="section-header">
+        <h2 id="vision-title">Das Projektmodell</h2>
+        <p id="vision-subtitle">Ein zweistufiger Ansatz: Erst die lokale Debatte vor Ort, dann die globale, nachhaltige Aufarbeitung.</p>
+    </div>
+
+    <div class="roadmap-grid">
+        <div class="phase-card active-phase">
+            <span class="phase-tag" id="phase1-tag">Phase 1: 2026 – 2028</span>
+            <h3 id="phase1-title">Schul-Foyer Initiative</h3>
+            <p id="phase1-desc">
+                Alle 3 Wochen verwandelt sich das Schulfoyer in einen philosophischen und gesellschaftlichen Resonanzraum. Schülerinnen und Schüler diskutieren spontan über komplexe Fragen zu Psychologie, Werten, Technologie und Ethik – gefördert durch evidenzbasierte Anstöße.
+            </p>
+        </div>
+
+        <div class="phase-card future-phase">
+            <span class="phase-tag" id="phase2-tag">Phase 2: Post-Graduation & Zukunft</span>
+            <h3 id="phase2-title">Perspektiven & Lebensweisheiten Archiv</h3>
+            <p id="phase2-desc">
+                Nach dem Schulabschluss entwickelt sich diese Webseite zu einem dauerhaften digitalen Wissensarchiv. Ebenso werden weiterhin komplexe Probleme von mir analysiert und die Lösungen für eine breitere Öffentlichkeit zugänglich gemacht.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="curriculum">
+    <div class="section-header">
+        <h2 id="syllabus-title">Das Themen-Syllabus</h2>
+        <p id="syllabus-subtitle">Klicke auf ein Thema, um Antworten, wissenschaftliche Hintergründe und Ergebnisse aus dem Schulfoyer einzusehen.</p>
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterTopics(event, 'all')" id="filter-all">Alle Themen</button>
+        <button class="filter-btn" onclick="filterTopics(event, 'psychology')" id="filter-psych">Psychologie & Denken</button>
+        <button class="filter-btn" onclick="filterTopics(event, 'society')" id="filter-soc">Gesellschaft & Demokratie</button>
+        <button class="filter-btn" onclick="filterTopics(event, 'tech')" id="filter-tech">Technologie & Zukunft</button>
+        <button class="filter-btn" onclick="filterTopics(event, 'ethics')" id="filter-eth">Ethik & Moral</button>
+        <button class="filter-btn" onclick="filterTopics(event, 'meta')" id="filter-meta">Meta & Führung</button>
+    </div>
+
+    <div class="topics-grid" id="topics-grid">
+        <!-- Topics Rendered via JS -->
+    </div>
+</section>
+
+</main>
+
+<!-- Modal Fenster für Thema-Details -->
+
+<div class="modal-overlay" id="topic-modal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+            <span class="category-tag" id="modal-cat">Kategorie</span>
+            <span class="session-num" id="modal-session" style="margin-left: 10px;">EDITION</span>
+            <h3 id="modal-title" style="font-family: 'Cinzel', serif; font-size: 24px; margin-top: 12px; color: var(--text-main);">Themen-Titel</h3>
+        </div>
+        <div class="modal-body" id="modal-body-content">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h2>The Perspective Project</h2>
+            <p id="footer-desc">Eine Initiative zur Förderung intellektueller Neugier, sokratischen Dialogs und langfristiger Reflexion über menschliche Werte.</p>
+        </div>
+        <div>
+            <h4 style="color: white; margin-bottom: 12px;" id="footer-loc-title">Initiative & Archiv</h4>
+            <p id="footer-loc-desc">Gestartet im Schulfoyer | Nachhaltig fortgeführt als digitales Perspektiven-Archiv.</p>
         </div>
     </div>
 
-    <section class="hero">
-        <span class="hero-badge" id="hero-badge">Schülerinitiative & Digitales Archiv</span>
-        <h1 id="hero-title">Erforschung von Mensch, Ethik, Technologie & Zukunft</h1>
-        <p id="hero-subtitle">Vom interaktiven Dialog im Schulfoyer zu einer langfristigen Wissensplattform für kritische Lebensfragen und Perspektiven.</p>
-        
-        <div class="hero-stats">
-            <div class="stat-item">
-                <h3 id="stat-1-val">25 Themen</h3>
-                <p id="stat-1-lbl">Schul-Workshops</p>
-            </div>
-            <div class="stat-item">
-                <h3 id="stat-2-val">2 Jahre</h3>
-                <p id="stat-2-lbl">Foyer-Initiative</p>
-            </div>
-            <div class="stat-item">
-                <h3 id="stat-3-val">Infinity</h3>
-                <p id="stat-3-lbl">Digitales Archiv</p>
-            </div>
+<div class="impressum-section" id="impressum">
+    <h3 id="imp-title">Impressum</h3>
+    <div class="impressum-grid">
+        <div class="impressum-box">
+            <p><strong id="imp-head-responsible">Angaben gemäß § 5 DDG:</strong></p>
+            <p>Azra M. Ates</p>
+            <p>Villingen, Deutschland</p>
         </div>
-    </section>
-
-    <main class="container">
-
-        <section id="vision">
-            <div class="section-header">
-                <h2 id="vision-title">Das Projektmodell</h2>
-                <p id="vision-subtitle">Ein zweistufiger Ansatz: Erst die lokale Debatte vor Ort, dann die globale, nachhaltige Aufarbeitung.</p>
-            </div>
-
-            <div class="roadmap-grid">
-                <div class="phase-card active-phase">
-                    <span class="phase-tag" id="phase1-tag">Phase 1: 2026 – 2028</span>
-                    <h3 id="phase1-title">Schul-Foyer Initiative</h3>
-                    <p id="phase1-desc">
-                        Alle 3 Wochen verwandelt sich das Schulfoyer in einen philosophischen und gesellschaftlichen Resonanzraum. Schülerinnen und Schüler diskutieren spontan über komplexe Fragen zu Psychologie, Werten, Technologie und Ethik – gefördert durch evidenzbasierte Anstöße.
-                    </p>
-                </div>
-
-                <div class="phase-card future-phase">
-                    <span class="phase-tag" id="phase2-tag">Phase 2: Post-Graduation & Zukunft</span>
-                    <h3 id="phase2-title">Perspektiven & Lebensweisheiten Archiv</h3>
-                    <p id="phase2-desc">
-                        Nach dem Schulabschluss entwickelt sich diese Webseite zu einem dauerhaften digitalen Wissensarchiv. Ebenso werden weiterhin komplexe Probleme von mir analysiert und die Lösungen für eine breitere Öffentlichkeit zugänglich gemacht.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="curriculum">
-            <div class="section-header">
-                <h2 id="syllabus-title">Das Themen-Syllabus</h2>
-                <p id="syllabus-subtitle">Kuratierte Ausgaben, die sowohl im Schulfoyer diskutiert als auch langfristig digital aufbereitet werden.</p>
-            </div>
-
-            <div class="filter-container">
-                <button class="filter-btn active" onclick="filterTopics(event, 'all')" id="filter-all">Alle Themen</button>
-                <button class="filter-btn" onclick="filterTopics(event, 'psychology')" id="filter-psych">Psychologie & Denken</button>
-                <button class="filter-btn" onclick="filterTopics(event, 'society')" id="filter-soc">Gesellschaft & Demokratie</button>
-                <button class="filter-btn" onclick="filterTopics(event, 'tech')" id="filter-tech">Technologie & Zukunft</button>
-                <button class="filter-btn" onclick="filterTopics(event, 'ethics')" id="filter-eth">Ethik & Moral</button>
-                <button class="filter-btn" onclick="filterTopics(event, 'meta')" id="filter-meta">Meta & Führung</button>
-            </div>
-
-            <div class="topics-grid" id="topics-grid">
-                <!-- Topics dynamically rendered -->
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <h2>The Perspective Project</h2>
-                <p id="footer-desc">Eine Initiative zur Förderung intellektueller Neugier, sokratischen Dialogs und langfristiger Reflexion über menschliche Werte.</p>
-            </div>
-            <div>
-                <h4 style="color: white; margin-bottom: 12px;" id="footer-loc-title">Initiative & Archiv</h4>
-                <p id="footer-loc-desc">Gestartet im Schulfoyer | Nachhaltig fortgeführt als digitales Perspektiven-Archiv.</p>
-            </div>
+        <div class="impressum-box">
+            <p><strong id="imp-head-contact">Kontakt:</strong></p>
+            <p>E-Mail: <a href="mailto:perspectivesinitiative@gmail.com">perspectivesinitiative@gmail.com</a></p>
         </div>
+    </div>
+    <div class="impressum-disclaimer" id="imp-disclaimer">
+        <p id="imp-disclaimer-text"><strong>Haftung für Inhalte:</strong> Die Inhalte meiner Seite wurden mit größter Sorgfalt erstellt. Für die Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Sollten Fehler oder unvollständige Informationen auffallen, bemühe ich mich, diese zeitnah zu korrigieren.</p>
+    </div>
 
-        <!-- Impressum & Datenschutz Section -->
-        <div class="impressum-section" id="impressum">
-            <h3 id="imp-title">Impressum</h3>
-            <div class="impressum-grid">
-                <div class="impressum-box">
-                    <p><strong id="imp-head-responsible">Angaben gemäß § 5 DDG:</strong></p>
-                    <p>Azra M. Ates</p>
-                    <p>Villingen, Deutschland</p>
-                </div>
-                <div class="impressum-box">
-                    <p><strong id="imp-head-contact">Kontakt:</strong></p>
-                    <p>E-Mail: <a href="mailto:perspectivesinitiative@gmail.com">perspectivesinitiative@gmail.com</a></p>
-                </div>
-            </div>
-            <div class="impressum-disclaimer" id="imp-disclaimer">
-                <p id="imp-disclaimer-text"><strong>Haftung für Inhalte:</strong> Die Inhalte meiner Seite wurden mit größter Sorgfalt erstellt. Für die Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Sollten Fehler oder unvollständige Informationen auffallen, bemühe ich mich, diese zeitnah zu korrigieren.</p>
-            </div>
+    <div class="privacy-box">
+        <h4 id="privacy-title">Datenschutz & Anonymität</h4>
+        <p id="privacy-desc">Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht.</p>
+    </div>
+</div>
 
-            <!-- Datenschutz Hinweis -->
-            <div class="privacy-box">
-                <h4 id="privacy-title">Datenschutz & Anonymität</h4>
-                <p id="privacy-desc">Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht.</p>
-            </div>
-        </div>
+<div class="footer-bottom">
+    <p>© <span id="year"></span> The Perspective Project | Created for College Admissions & Lifelong Reflection</p>
+</div>
 
-        <div class="footer-bottom">
-            <p>© <span id="year"></span> The Perspective Project | Created for College Admissions & Lifelong Reflection</p>
-        </div>
-    </footer>
+</footer>
 
-    <script>
-        document.getElementById('year').innerText = new Date().getFullYear();
+<script>
+    document.getElementById('year').innerText = new Date().getFullYear();
 
-        let currentLang = 'de';
-        let currentFilter = 'all';
+    let currentLang = 'de';
+    let currentFilter = 'all';
 
-        // Topic Database - All 25 Wochen / 5 Editionen mit voll-zweisprachigen Daten
-        const topicsData = [
-            // EDITION 01: Psychologie & Denken
-            {
-                id: 1,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 1–3',
-                sessionEN: 'EDITION 01 | WEEK 1–3',
-                titleDE: 'Warum haben Menschen unterschiedliche Meinungen?',
-                titleEN: 'Why Do People Hold Divergent Opinions?',
-                qDE: ['Hauptfrage: Warum können zwei Menschen dieselben Informationen haben und trotzdem etwas anderes glauben?'],
-                qEN: ['Main question: How can two individuals hold identical information yet arrive at completely different beliefs?']
-            },
-            {
-                id: 2,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 4–6',
-                sessionEN: 'EDITION 01 | WEEK 4–6',
-                titleDE: 'Warum verteidigen Menschen ihre Meinungen?',
-                titleEN: 'Why Do People Defend Their Opinions?',
-                qDE: ['Hauptfrage: Warum halten Menschen an Überzeugungen fest, selbst wenn sie neue Informationen bekommen?'],
-                qEN: ['Main question: Why do people cling to convictions even when presented with new counter-evidence?']
-            },
-            {
-                id: 3,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 7–9',
-                sessionEN: 'EDITION 01 | WEEK 7–9',
-                titleDE: 'Wie entstehen Vorurteile und warum haben wir sie?',
-                titleEN: 'How Do Biases Arise and Why Do We Have Them?',
-                qDE: ['Hauptfrage: Sind Vorurteile immer bewusst oder entstehen sie manchmal unbemerkt?'],
-                qEN: ['Main question: Are prejudices always conscious, or do they often form undetected?']
-            },
-            {
-                id: 4,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 10–12',
-                sessionEN: 'EDITION 01 | WEEK 10–12',
-                titleDE: 'Warum fällt es Menschen schwer, ihre Meinung zu ändern?',
-                titleEN: 'Why Is Changing One\'s Mind So Difficult?',
-                qDE: ['Hauptfrage: Ist es eine Schwäche oder eine Stärke, seine Meinung zu ändern?'],
-                qEN: ['Main question: Is revising one\'s stance a sign of weakness or intellectual strength?']
-            },
-            {
-                id: 5,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 13–15',
-                sessionEN: 'EDITION 01 | WEEK 13–15',
-                titleDE: 'Wie beeinflussen Emotionen unser Denken?',
-                titleEN: 'How Do Emotions Shape Our Thinking?',
-                qDE: ['Hauptfrage: Entscheiden wir wirklich rational oder beeinflussen Gefühle unsere Entscheidungen?'],
-                qEN: ['Main question: Do we truly decide rationally, or do emotions drive our choices?']
-            },
-            {
-                id: 6,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 16–18',
-                sessionEN: 'EDITION 01 | WEEK 16–18',
-                titleDE: 'Sehen wir die Wahrheit oder nur unsere eigene Perspektive?',
-                titleEN: 'Do We See Truth or Only Our Own Perspective?',
-                qDE: ['Hauptfrage: Kann es verschiedene Wahrheiten geben?'],
-                qEN: ['Main question: Can multiple subjective truths exist simultaneously?']
-            },
-            {
-                id: 7,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 19–21',
-                sessionEN: 'EDITION 01 | WEEK 19–21',
-                titleDE: 'Warum folgen Menschen Gruppen und Trends?',
-                titleEN: 'Why Do People Conform to Groups & Trends?',
-                qDE: ['Hauptfrage: Warum passen Menschen ihre Meinung manchmal an andere an?'],
-                qEN: ['Main question: Why do individuals adjust their views to align with social consensus?']
-            },
-            {
-                id: 8,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 22–24',
-                sessionEN: 'EDITION 01 | WEEK 22–24',
-                titleDE: 'Wie beeinflussen Erfahrungen unsere Persönlichkeit und unser Denken?',
-                titleEN: 'How Do Experiences Mold Personality and Thought?',
-                qDE: ['Hauptfrage: Wie formen Familie, Kultur und Umfeld unsere Sicht auf die Welt?'],
-                qEN: ['Main question: How do family, culture, and social environment shape worldviews?']
-            },
-            {
-                id: 9,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 25–27',
-                sessionEN: 'EDITION 01 | WEEK 25–27',
-                titleDE: 'Warum entstehen Konflikte zwischen Menschen?',
-                titleEN: 'Why Do Interpersonal Conflicts Arise?',
-                qDE: ['Hauptfrage: Entstehen Konflikte durch Unterschiede oder durch fehlendes Verständnis?'],
-                qEN: ['Main question: Are conflicts caused by fundamental differences or lack of empathy?']
-            },
-            {
-                id: 10,
-                cat: 'psychology',
-                catDE: 'Psychologie & Denken',
-                catEN: 'Psychology & Cognition',
-                sessionDE: 'EDITION 01 | WOCHE 28–30',
-                sessionEN: 'EDITION 01 | WEEK 28–30',
-                titleDE: 'Wie kann man respektvoll widersprechen?',
-                titleEN: 'How Can We Disagree Respectfully?',
-                qDE: ['Hauptfrage: Wie können Menschen anderer Meinung sein, ohne sich gegenseitig abzuwerten?'],
-                qEN: ['Main question: How can people hold opposing viewpoints without devaluing one another?']
-            },
+    // Topics Database with Active States & Dynamic Details
+    const topicsData = [
+        {
+            id: 1,
 
-            // EDITION 02: Gesellschaft & Demokratie
-            {
-                id: 11,
-                cat: 'society',
-                catDE: 'Gesellschaft & Demokratie',
-                catEN: 'Society & Democracy',
-                sessionDE: 'EDITION 02 | WOCHE 31–33',
-                sessionEN: 'EDITION 02 | WEEK 31–33',
-                titleDE: 'Wie kann eine Gesellschaft mit unterschiedlichen Meinungen funktionieren?',
-                titleEN: 'How Can a Society Function Amidst Plurality?',
-                qDE: ['Hauptfrage: Wie lässt sich gesellschaftlicher Zusammenhalt trotz tiefer Spaltungen bewahren?'],
-                qEN: ['Main question: How can social cohesion be maintained despite deep ideological divides?']
-            },
-            {
-                id: 12,
-                cat: 'society',
-                catDE: 'Gesellschaft & Demokratie',
-                catEN: 'Society & Democracy',
-                sessionDE: 'EDITION 02 | WOCHE 34–36',
-                sessionEN: 'EDITION 02 | WEEK 34–36',
-                titleDE: 'Warum wird öffentliche Diskussion immer schwieriger?',
-                titleEN: 'Why Is Public Discourse Becoming More Polarization-Prone?',
-                qDE: ['Hauptfrage: Welche Faktoren erschweren den lösungsorientierten Dialog in der Öffentlichkeit?'],
-                qEN: ['Main question: What structural barriers hinder constructive debate in modern public spheres?']
-            },
+            isActive: true, // Das aktuell laufende Thema im Schulfoyer
 
-            // EDITION 03: Technologie & Zukunft
-            {
-                id: 13,
-                cat: 'tech',
-                catDE: 'Technologie & Zukunft',
-                catEN: 'Technology & Future',
-                sessionDE: 'EDITION 03 | WOCHE 37–39',
-                sessionEN: 'EDITION 03 | WEEK 37–39',
-                titleDE: 'Wie beeinflusst künstliche Intelligenz unser Denken?',
-                titleEN: 'How Does Artificial Intelligence Affect Human Cognition?',
-                qDE: ['Hauptfrage: Verändert die Auslagerung von Denkprozessen an KI unsere kognitiven Fähigkeiten?'],
-                qEN: ['Main question: Does offloading mental tasks to AI reshape our intrinsic cognitive faculties?']
-            },
-            {
-                id: 14,
-                cat: 'tech',
-                catDE: 'Technologie & Zukunft',
-                catEN: 'Technology & Future',
-                sessionDE: 'EDITION 03 | WOCHE 40–42',
-                sessionEN: 'EDITION 03 | WEEK 40–42',
-                titleDE: 'Verändern soziale Medien unsere Meinungen?',
-                titleEN: 'Do Social Media Platforms Alter Our Beliefs?',
-                qDE: ['Hauptfrage: Welchen Einfluss haben Algorithmen und Echo-Kammern auf das Weltbild?'],
-                qEN: ['Main question: How do algorithms and filter bubbles engineer societal worldviews?']
-            },
-            {
-                id: 15,
-                cat: 'tech',
-                catDE: 'Technologie & Zukunft',
-                catEN: 'Technology & Future',
-                sessionDE: 'EDITION 03 | WOCHE 43–45',
-                sessionEN: 'EDITION 03 | WEEK 43–45',
-                titleDE: 'Kann Technologie neutral sein?',
-                titleEN: 'Can Technology Ever Be Truly Neutral?',
-                qDE: ['Hauptfrage: Spiegeln technologische Werkzeuge die Werte ihrer Erfinder wider?'],
-                qEN: ['Main question: Do technological tools inherently carry the value systems of their creators?']
-            },
-            {
-                id: 16,
-                cat: 'tech',
-                catDE: 'Technologie & Zukunft',
-                catEN: 'Technology & Future',
-                sessionDE: 'EDITION 03 | WOCHE 46–48',
-                sessionEN: 'EDITION 03 | WEEK 46–48',
-                titleDE: 'Wer trägt Verantwortung für künstliche Intelligenz?',
-                titleEN: 'Who Holds Responsibility for Artificial Intelligence?',
-                qDE: ['Hauptfrage: Wie teilen sich Entwickler, Nutzer und Staaten die ethische Haftung?'],
-                qEN: ['Main question: How is ethical liability shared among developers, users, and regulatory states?']
-            },
-            {
-                id: 17,
-                cat: 'tech',
-                catDE: 'Technologie & Zukunft',
-                catEN: 'Technology & Future',
-                sessionDE: 'EDITION 03 | WOCHE 49–51',
-                sessionEN: 'EDITION 03 | WEEK 49–51',
-                titleDE: 'Was bleibt menschlich in einer Welt voller Technologie?',
-                titleEN: 'What Remains Uniquely Human in a Tech-Driven World?',
-                qDE: ['Hauptfrage: Welche Eigenschaften definieren den Menschen, wenn Maschinen immer intelligenter werden?'],
-                qEN: ['Main question: What essential human characteristics persist when automated systems excel?']
-            },
+            cat: 'psychology',
 
-            // EDITION 04: Ethik & Moral
-            {
-                id: 18,
-                cat: 'ethics',
-                catDE: 'Ethik & Moral',
-                catEN: 'Ethics & Morality',
-                sessionDE: 'EDITION 04 | WOCHE 52–54',
-                sessionEN: 'EDITION 04 | WEEK 52–54',
-                titleDE: 'Was bedeutet es, ein guter Mensch zu sein?',
-                titleEN: 'What Does It Mean to Be a Good Person?',
-                qDE: ['Hauptfrage: Basiert Moral auf universellen Regeln, Handlungen oder innerer Haltung?'],
-                qEN: ['Main question: Is morality defined by universal laws, outcomes, or intrinsic virtue?']
-            },
-            {
-                id: 19,
-                cat: 'ethics',
-                catDE: 'Ethik & Moral',
-                catEN: 'Ethics & Morality',
-                sessionDE: 'EDITION 04 | WOCHE 55–57',
-                sessionEN: 'EDITION 04 | WEEK 55–57',
-                titleDE: 'Ist eine gute Absicht wichtiger als ein gutes Ergebnis?',
-                titleEN: 'Is Good Intent More Important Than a Good Outcome?',
-                qDE: ['Hauptfrage: Beurteilen wir die Moral einer Tat nach ihren Beweggründen oder den Konsequenzen?'],
-                qEN: ['Main question: Should actions be evaluated based on underlying intent or ultimate consequences?']
-            },
-            {
-                id: 20,
-                cat: 'ethics',
-                catDE: 'Ethik & Moral',
-                catEN: 'Ethics & Morality',
-                sessionDE: 'EDITION 04 | WOCHE 58–60',
-                sessionEN: 'EDITION 04 | WEEK 58–60',
-                titleDE: 'Soll jeder eine zweite Chance bekommen?',
-                titleEN: 'Should Everyone Deserve a Second Chance?',
-                qDE: ['Hauptfrage: Wo liegen die Grenzen der Vergebung und gesellschaftlichen Reintegration?'],
-                qEN: ['Main question: What are the ethical limits of forgiveness and social reintegration?']
-            },
+            catDE: 'Psychologie & Denken',
 
-            // EDITION 05: Meta & Führung
-            {
-                id: 21,
-                cat: 'meta',
-                catDE: 'Meta & Führung',
-                catEN: 'Meta & Leadership',
-                sessionDE: 'EDITION 05 | WOCHE 61–63',
-                sessionEN: 'EDITION 05 | WEEK 61–63',
-                titleDE: 'Was macht einen guten Anführer aus?',
-                titleEN: 'What Defines Exceptional Leadership?',
-                qDE: ['Hauptfrage: Ist Führung eine Frage von Autorität, Empathie oder Vision?'],
-                qEN: ['Main question: Does effective leadership rely on authority, empathy, or vision?']
-            },
-            {
-                id: 22,
-                cat: 'meta',
-                catDE: 'Meta & Führung',
-                catEN: 'Meta & Leadership',
-                sessionDE: 'EDITION 05 | WOCHE 64–66',
-                sessionEN: 'EDITION 05 | WEEK 64–66',
-                titleDE: 'Warum vertrauen Menschen bestimmten Personen?',
-                titleEN: 'Why Do People Trust Certain Individuals?',
-                qDE: ['Hauptfrage: Wie entsteht Vertrauen und wie unterscheidet man Glaubwürdigkeit von Manipulation?'],
-                qEN: ['Main question: How is trust built, and how can credibility be distinguished from charisma?']
-            },
-            {
-                id: 23,
-                cat: 'meta',
-                catDE: 'Meta & Führung',
-                catEN: 'Meta & Leadership',
-                sessionDE: 'EDITION 05 | WOCHE 67–69',
-                sessionEN: 'EDITION 05 | WEEK 67–69',
-                titleDE: 'Wie können junge Menschen Veränderung schaffen?',
-                titleEN: 'How Can Youth Drive Systemic Change?',
-                qDE: ['Hauptfrage: Welche Hebel haben Jugendliche, um gesellschaftlichen Wandel aktiv zu gestalten?'],
-                qEN: ['Main question: What leverage points do young people possess to impact social structures?']
-            },
-            {
-                id: 24,
-                cat: 'meta',
-                catDE: 'Meta & Führung',
-                catEN: 'Meta & Leadership',
-                sessionDE: 'EDITION 05 | WOCHE 70–72',
-                sessionEN: 'EDITION 05 | WEEK 70–72',
-                titleDE: 'Was macht eine starke Gemeinschaft aus?',
-                titleEN: 'What Forms the Foundation of a Strong Community?',
-                qDE: ['Hauptfrage: Wie verbindet man individuelle Freiheit mit Verpflichtung gegenüber der Gruppe?'],
-                qEN: ['Main question: How can individual autonomy be balanced with communal duty?']
+            catEN: 'Psychology & Cognition',
+
+            sessionDE: 'EDITION 01 | WOCHE 1–3',
+
+            sessionEN: 'EDITION 01 | WEEK 1–3',
+
+            titleDE: 'Warum haben Menschen unterschiedliche Meinungen?',
+
+            titleEN: 'Why Do People Hold Divergent Opinions?',
+
+            qDE: ['Hauptfrage: Warum können zwei Menschen dieselben Informationen haben und trotzdem etwas anderes glauben?'],
+
+            qEN: ['Main question: How can two individuals hold identical information yet arrive at completely different beliefs?'],
+
+            detailDE: {
+
+    overview: 'Jeder Mensch interpretiert Fakten durch seine eigene "kognitive Brille". Wissenschaftliche Forschung zeigt, dass verschiedene Faktoren beeinflussen können, wie wir dieselbe Information wahrnehmen und bewerten. <b>Welche Faktoren das sind, wird nach Abschluss der aktuellen Diskussionsphase veröffentlicht.</b>',
+
+    insights: [
+        '<div class="locked-info"><b>Dieser Bereich ist derzeit noch gesperrt</b><br><br>Die Kernpunkte werden erst nach Abschluss der aktuellen Diskussion im Schulfoyer veröffentlicht. So erhalten alle Teilnehmenden die Möglichkeit, sich zunächst eine eigene Meinung zu bilden.</div>'
+    ],
+
+    question: 'Welches Argument hat deine Sichtweise auf ein Thema in letzter Zeit am stärksten verändert?'
+
+},
+
+            detailEN: {
+
+                overview: 'Every person interprets facts through their own "cognitive lens." Scientific research suggests that a variety of factors can influence how we perceive and evaluate the very same information. <b>What those factors are will be revealed after the current discussion phase has concluded.</b>',
+
+                insights: [
+
+                    '<b>This section is currently locked.</b>',
+
+                    'The key insights and scientific findings will be published after the current school foyer discussion has been completed. This allows all participants to develop and reflect on their own perspectives before exploring the research and conclusions.',
+
+                    
+
+                ],
+
+                question: 'What argument or conversation recently challenged your perspective on an important issue?'
+
             }
-        ];
 
-        // Dictionary for Language Switching
-        const uiText = {
-            de: {
-                bannerBadge: 'Aktuell in Bearbeitung',
-                bannerText: 'Das Projekt startet am 14. September 2026. Aktuell befindet sich das Projekt in der Vorbereitung.',
-                badge: 'Schülerinitiative & Digitales Archiv',
-                title: 'Erforschung von Mensch, Ethik, Technologie & Zukunft',
-                subtitle: 'Vom interaktiven Dialog im Schulfoyer zu einer langfristigen Wissensplattform für kritische Lebensfragen und Perspektiven.',
-                stat1Val: '25 Themen',
-                stat1Lbl: 'Schul-Workshops',
-                stat2Val: '2 Jahre',
-                stat2Lbl: 'Foyer-Initiative',
-                stat3Val: 'Infinity',
-                stat3Lbl: 'Digitales Archiv',
-                navVision: 'Vision & Phasen',
-                navSyllabus: 'Syllabus & Archiv',
-                navImpressum: 'Impressum',
-                visionTitle: 'Das Projektmodell',
-                visionSubtitle: 'Ein zweistufiger Ansatz: Erst die lokale Debatte vor Ort, dann die globale, nachhaltige Aufarbeitung.',
-                phase1Tag: 'Phase 1: 2026 – 2028',
-                phase1Title: 'Schul-Foyer Initiative',
-                phase1Desc: 'Alle 3 Wochen verwandelt sich das Schulfoyer in einen philosophischen und gesellschaftlichen Resonanzraum. Schülerinnen und Schüler diskutieren spontan über komplexe Fragen zu Psychologie, Werten, Technologie und Ethik – gefördert durch evidenzbasierte Anstöße.',
-                phase2Tag: 'Phase 2: Post-Graduation & Zukunft',
-                phase2Title: 'Perspektiven & Lebensweisheiten Archiv',
-                phase2Desc: 'Nach dem Schulabschluss entwickelt sich diese Webseite zu einem dauerhaften digitalen Wissensarchiv. Ebenso werden weiterhin komplexe Probleme von mir analysiert und die Lösungen für eine breitere Öffentlichkeit zugänglich gemacht.',
-                syllabusTitle: 'Das Themen-Syllabus',
-                syllabusSubtitle: 'Kuratierte Ausgaben, die sowohl im Schulfoyer diskutiert als auch langfristig digital aufbereitet werden.',
-                filterAll: 'Alle Themen',
-                filterPsych: 'Psychologie & Denken',
-                filterSoc: 'Gesellschaft & Demokratie',
-                filterTech: 'Technologie & Zukunft',
-                filterEth: 'Ethik & Moral',
-                filterMeta: 'Meta & Führung',
-                footerDesc: 'Eine Initiative zur Förderung intellektueller Neugier, sokratischen Dialogs und langfristiger Reflexion über menschliche Werte.',
-                footerLocTitle: 'Initiative & Archiv',
-                footerLocDesc: 'Gestartet im Schulfoyer | Nachhaltig fortgeführt als digitales Perspektiven-Archiv.',
-                impTitle: 'Impressum',
-                impHeadResp: 'Angaben gemäß § 5 DDG:',
-                impHeadContact: 'Kontakt:',
-                impDisclaimerText: '<strong>Haftung für Inhalte:</strong> Die Inhalte meiner Seite wurden mit größter Sorgfalt erstellt. Für die Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Sollten Fehler oder unvollständige Informationen auffallen, bemühe ich mich, diese zeitnah zu korrigieren.',
-                privacyTitle: 'Datenschutz & Anonymität',
-                privacyDesc: 'Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht.'
-            },
-            en: {
-                bannerBadge: 'Currently in Progress',
-                bannerText: 'The project will launch on September 14, 2026. It is currently under active preparation.',
-                badge: 'Student Initiative & Digital Archive',
-                title: 'Exploring Humanity, Ethics, Technology & the Future',
-                subtitle: 'From interactive discussions in the school foyer to a lasting digital repository for critical philosophical inquiries.',
-                stat1Val: '25 Topics',
-                stat1Lbl: 'School Workshops',
-                stat2Val: '2 Years',
-                stat2Lbl: 'Foyer Initiative',
-                stat3Val: 'Infinity',
-                stat3Lbl: 'Digital Archive',
-                navVision: 'Vision & Phases',
-                navSyllabus: 'Syllabus & Archive',
-                navImpressum: 'Legal Notice',
-                visionTitle: 'The Project Framework',
-                visionSubtitle: 'A two-stage approach: Local discussions on campus followed by long-term digital documentation.',
-                phase1Tag: 'Phase 1: 2026 – 2028',
-                phase1Title: 'Foyer Dialogue Initiative',
-                phase1Desc: 'Every 3 weeks, the school foyer turns into a hub for intellectual debate. Students spontaneously explore complex questions on psychology, ethics, and technology guided by evidence-backed prompts.',
-                phase2Tag: 'Phase 2: Post-Graduation & Beyond',
-                phase2Title: 'Wisdom & Perspective Archive',
-                phase2Desc: 'Following graduation, this web application evolves into an enduring knowledge archive. Complex societal issues will continue to be analyzed and made accessible for a wider audience.',
-                syllabusTitle: 'Curriculum & Syllabus',
-                syllabusSubtitle: 'Curated editions designed for real-world debates and subsequent digital publication.',
-                filterAll: 'All Topics',
-                filterPsych: 'Psychology & Cognition',
-                filterSoc: 'Society & Democracy',
-                filterTech: 'Technology & Future',
-                filterEth: 'Ethics & Morality',
-                filterMeta: 'Meta & Leadership',
-                footerDesc: 'An initiative dedicated to cultivating intellectual curiosity, Socratic dialogue, and deep reflection on human values.',
-                footerLocTitle: 'Initiative & Archive',
-                footerLocDesc: 'Launched on campus | Continued as a permanent digital archive.',
-                impTitle: 'Legal Notice (Impressum)',
-                impHeadResp: 'Information according to § 5 DDG:',
-                impHeadContact: 'Contact:',
-                impDisclaimerText: '<strong>Liability for Content:</strong> Content has been created with utmost care. However, no liability can be assumed for completeness or timeliness. Corrections will be promptly applied upon notification.',
-                privacyTitle: 'Data Privacy & Anonymity',
-                privacyDesc: 'Survey and discussion responses are evaluated and published exclusively in anonymous form.'
-            }
-        };
+        },
 
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.getElementById('btn-de').classList.toggle('active', lang === 'de');
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        {
 
-            const t = uiText[lang];
-            document.getElementById('banner-badge').innerText = t.bannerBadge;
-            document.getElementById('banner-text').innerText = t.bannerText;
-            document.getElementById('hero-badge').innerText = t.badge;
-            document.getElementById('hero-title').innerText = t.title;
-            document.getElementById('hero-subtitle').innerText = t.subtitle;
-            
-            // Hero Stats Dynamic Switch
-            document.getElementById('stat-1-val').innerText = t.stat1Val;
-            document.getElementById('stat-1-lbl').innerText = t.stat1Lbl;
-            document.getElementById('stat-2-val').innerText = t.stat2Val;
-            document.getElementById('stat-2-lbl').innerText = t.stat2Lbl;
-            document.getElementById('stat-3-val').innerText = t.stat3Val;
-            document.getElementById('stat-3-lbl').innerText = t.stat3Lbl;
+            id: 2,
 
-            document.getElementById('nav-vision').innerText = t.navVision;
-            document.getElementById('nav-syllabus').innerText = t.navSyllabus;
-            document.getElementById('nav-impressum').innerText = t.navImpressum;
-            document.getElementById('vision-title').innerText = t.visionTitle;
-            document.getElementById('vision-subtitle').innerText = t.visionSubtitle;
-            document.getElementById('phase1-tag').innerText = t.phase1Tag;
-            document.getElementById('phase1-title').innerText = t.phase1Title;
-            document.getElementById('phase1-desc').innerText = t.phase1Desc;
-            document.getElementById('phase2-tag').innerText = t.phase2Tag;
-            document.getElementById('phase2-title').innerText = t.phase2Title;
-            document.getElementById('phase2-desc').innerText = t.phase2Desc;
-            document.getElementById('syllabus-title').innerText = t.syllabusTitle;
-            document.getElementById('syllabus-subtitle').innerText = t.syllabusSubtitle;
-            document.getElementById('filter-all').innerText = t.filterAll;
-            document.getElementById('filter-psych').innerText = t.filterPsych;
-            document.getElementById('filter-soc').innerText = t.filterSoc;
-            document.getElementById('filter-tech').innerText = t.filterTech;
-            document.getElementById('filter-eth').innerText = t.filterEth;
-            document.getElementById('filter-meta').innerText = t.filterMeta;
-            document.getElementById('footer-desc').innerText = t.footerDesc;
-            document.getElementById('footer-loc-title').innerText = t.footerLocTitle;
-            document.getElementById('footer-loc-desc').innerText = t.footerLocDesc;
-            document.getElementById('imp-title').innerText = t.impTitle;
-            document.getElementById('imp-head-responsible').innerText = t.impHeadResp;
-            document.getElementById('imp-head-contact').innerText = t.impHeadContact;
-            document.getElementById('imp-disclaimer-text').innerHTML = t.impDisclaimerText;
-            document.getElementById('privacy-title').innerText = t.privacyTitle;
-            document.getElementById('privacy-desc').innerText = t.privacyDesc;
+            isActive: false,
 
-            renderTopics();
+            cat: 'psychology',
+
+            catDE: 'Psychologie & Denken',
+
+            catEN: 'Psychology & Cognition',
+
+            sessionDE: 'EDITION 01 | WOCHE 4–6',
+
+            sessionEN: 'EDITION 01 | WEEK 4–6',
+
+            titleDE: 'Warum verteidigen Menschen ihre Meinungen?',
+
+            titleEN: 'Why Do People Defend Their Opinions?',
+
+            qDE: ['Hauptfrage: Warum halten Menschen an Überzeugungen fest, selbst wenn sie neue Informationen bekommen?'],
+
+            qEN: ['Main question: Why do people cling to convictions even when presented with new counter-evidence?']
+
+        },
+        {
+            id: 3,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 7–9',
+            sessionEN: 'EDITION 01 | WEEK 7–9',
+            titleDE: 'Wie entstehen Vorurteile und warum haben wir sie?',
+            titleEN: 'How Do Biases Arise and Why Do We Have Them?',
+            qDE: ['Hauptfrage: Sind Vorurteile immer bewusst oder entstehen sie manchmal unbemerkt?'],
+            qEN: ['Main question: Are prejudices always conscious, or do they often form undetected?']
+        },
+        {
+            id: 4,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 10–12',
+            sessionEN: 'EDITION 01 | WEEK 10–12',
+            titleDE: 'Warum fällt es Menschen schwer, ihre Meinung zu ändern?',
+            titleEN: 'Why Is Changing One\'s Mind So Difficult?',
+            qDE: ['Hauptfrage: Ist es eine Schwäche oder eine Stärke, seine Meinung zu ändern?'],
+            qEN: ['Main question: Is revising one\'s stance a sign of weakness or intellectual strength?']
+        },
+        {
+            id: 5,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 13–15',
+            sessionEN: 'EDITION 01 | WEEK 13–15',
+            titleDE: 'Wie beeinflussen Emotionen unser Denken?',
+            titleEN: 'How Do Emotions Shape Our Thinking?',
+            qDE: ['Hauptfrage: Entscheiden wir wirklich rational oder beeinflussen Gefühle unsere Entscheidungen?'],
+            qEN: ['Main question: Do we truly decide rationally, or do emotions drive our choices?']
+        },
+        {
+            id: 6,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 16–18',
+            sessionEN: 'EDITION 01 | WEEK 16–18',
+            titleDE: 'Sehen wir die Wahrheit oder nur unsere eigene Perspektive?',
+            titleEN: 'Do We See Truth or Only Our Own Perspective?',
+            qDE: ['Hauptfrage: Kann es verschiedene Wahrheiten geben?'],
+            qEN: ['Main question: Can multiple subjective truths exist simultaneously?']
+        },
+        {
+            id: 7,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 19–21',
+            sessionEN: 'EDITION 01 | WEEK 19–21',
+            titleDE: 'Warum folgen Menschen Gruppen und Trends?',
+            titleEN: 'Why Do People Conform to Groups & Trends?',
+            qDE: ['Hauptfrage: Warum passen Menschen ihre Meinung manchmal an andere an?'],
+            qEN: ['Main question: Why do individuals adjust their views to align with social consensus?']
+        },
+        {
+            id: 8,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 22–24',
+            sessionEN: 'EDITION 01 | WEEK 22–24',
+            titleDE: 'Wie beeinflussen Erfahrungen unsere Persönlichkeit und unser Denken?',
+            titleEN: 'How Do Experiences Mold Personality and Thought?',
+            qDE: ['Hauptfrage: Wie formen Familie, Kultur und Umfeld unsere Sicht auf die Welt?'],
+            qEN: ['Main question: How do family, culture, and social environment shape worldviews?']
+        },
+        {
+            id: 9,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 25–27',
+            sessionEN: 'EDITION 01 | WEEK 25–27',
+            titleDE: 'Warum entstehen Konflikte zwischen Menschen?',
+            titleEN: 'Why Do Interpersonal Conflicts Arise?',
+            qDE: ['Hauptfrage: Entstehen Konflikte durch Unterschiede oder durch fehlendes Verständnis?'],
+            qEN: ['Main question: Are conflicts caused by fundamental differences or lack of empathy?']
+        },
+        {
+            id: 10,
+            isActive: false,
+            cat: 'psychology',
+            catDE: 'Psychologie & Denken',
+            catEN: 'Psychology & Cognition',
+            sessionDE: 'EDITION 01 | WOCHE 28–30',
+            sessionEN: 'EDITION 01 | WEEK 28–30',
+            titleDE: 'Wie kann man respektvoll widersprechen?',
+            titleEN: 'How Can We Disagree Respectfully?',
+            qDE: ['Hauptfrage: Wie können Menschen anderer Meinung sein, ohne sich gegenseitig abzuwerten?'],
+            qEN: ['Main question: How can people hold opposing viewpoints without devaluing one another?']
+        },
+        {
+            id: 11,
+            isActive: false,
+            cat: 'society',
+            catDE: 'Gesellschaft & Demokratie',
+            catEN: 'Society & Democracy',
+            sessionDE: 'EDITION 02 | WOCHE 31–33',
+            sessionEN: 'EDITION 02 | WEEK 31–33',
+            titleDE: 'Wie kann eine Gesellschaft mit unterschiedlichen Meinungen funktionieren?',
+            titleEN: 'How Can a Society Function Amidst Plurality?',
+            qDE: ['Hauptfrage: Wie lässt sich gesellschaftlicher Zusammenhalt trotz tiefer Spaltungen bewahren?'],
+            qEN: ['Main question: How can social cohesion be maintained despite deep ideological divides?']
+        },
+        {
+            id: 12,
+            isActive: false,
+            cat: 'society',
+            catDE: 'Gesellschaft & Demokratie',
+            catEN: 'Society & Democracy',
+            sessionDE: 'EDITION 02 | WOCHE 34–36',
+            sessionEN: 'EDITION 02 | WEEK 34–36',
+            titleDE: 'Warum wird öffentliche Diskussion immer schwieriger?',
+            titleEN: 'Why Is Public Discourse Becoming More Polarization-Prone?',
+            qDE: ['Hauptfrage: Welche Faktoren erschweren den lösungsorientierten Dialog in der Öffentlichkeit?'],
+            qEN: ['Main question: What structural barriers hinder constructive debate in modern public spheres?']
+        },
+        {
+            id: 13,
+            isActive: false,
+            cat: 'tech',
+            catDE: 'Technologie & Zukunft',
+            catEN: 'Technology & Future',
+            sessionDE: 'EDITION 03 | WOCHE 37–39',
+            sessionEN: 'EDITION 03 | WEEK 37–39',
+            titleDE: 'Wie beeinflusst künstliche Intelligenz unser Denken?',
+            titleEN: 'How Does Artificial Intelligence Affect Human Cognition?',
+            qDE: ['Hauptfrage: Verändert die Auslagerung von Denkprozessen an KI unsere kognitiven Fähigkeiten?'],
+            qEN: ['Main question: Does offloading mental tasks to AI reshape our intrinsic cognitive faculties?']
+        },
+        {
+            id: 14,
+            isActive: false,
+            cat: 'tech',
+            catDE: 'Technologie & Zukunft',
+            catEN: 'Technology & Future',
+            sessionDE: 'EDITION 03 | WOCHE 40–42',
+            sessionEN: 'EDITION 03 | WEEK 40–42',
+            titleDE: 'Verändern soziale Medien unsere Meinungen?',
+            titleEN: 'Do Social Media Platforms Alter Our Beliefs?',
+            qDE: ['Hauptfrage: Welchen Einfluss haben Algorithmen und Echo-Kammern auf das Weltbild?'],
+            qEN: ['Main question: How do algorithms and filter bubbles engineer societal worldviews?']
+        },
+        {
+            id: 15,
+            isActive: false,
+            cat: 'tech',
+            catDE: 'Technologie & Zukunft',
+            catEN: 'Technology & Future',
+            sessionDE: 'EDITION 03 | WOCHE 43–45',
+            sessionEN: 'EDITION 03 | WEEK 43–45',
+            titleDE: 'Kann Technologie neutral sein?',
+            titleEN: 'Can Technology Ever Be Truly Neutral?',
+            qDE: ['Hauptfrage: Spiegeln technologische Werkzeuge die Werte ihrer Erfinder wider?'],
+            qEN: ['Main question: Do technological tools inherently carry the value systems of their creators?']
+        },
+        {
+            id: 16,
+            isActive: false,
+            cat: 'tech',
+            catDE: 'Technologie & Zukunft',
+            catEN: 'Technology & Future',
+            sessionDE: 'EDITION 03 | WOCHE 46–48',
+            sessionEN: 'EDITION 03 | WEEK 46–48',
+            titleDE: 'Wer trägt Verantwortung für künstliche Intelligenz?',
+            titleEN: 'Who Holds Responsibility for Artificial Intelligence?',
+            qDE: ['Hauptfrage: Wie teilen sich Entwickler, Nutzer und Staaten die ethische Haftung?'],
+            qEN: ['Main question: How is ethical liability shared among developers, users, and regulatory states?']
+        },
+        {
+            id: 17,
+            isActive: false,
+            cat: 'tech',
+            catDE: 'Technologie & Zukunft',
+            catEN: 'Technology & Future',
+            sessionDE: 'EDITION 03 | WOCHE 49–51',
+            sessionEN: 'EDITION 03 | WEEK 49–51',
+            titleDE: 'Was bleibt menschlich in einer Welt voller Technologie?',
+            titleEN: 'What Remains Uniquely Human in a Tech-Driven World?',
+            qDE: ['Hauptfrage: Welche Eigenschaften definieren den Menschen, wenn Maschinen immer intelligenter werden?'],
+            qEN: ['Main question: What essential human characteristics persist when automated systems excel?']
+        },
+        {
+            id: 18,
+            isActive: false,
+            cat: 'ethics',
+            catDE: 'Ethik & Moral',
+            catEN: 'Ethics & Morality',
+            sessionDE: 'EDITION 04 | WOCHE 52–54',
+            sessionEN: 'EDITION 04 | WEEK 52–54',
+            titleDE: 'Was bedeutet es, ein guter Mensch zu sein?',
+            titleEN: 'What Does It Mean to Be a Good Person?',
+            qDE: ['Hauptfrage: Basiert Moral auf universellen Regeln, Handlungen oder innerer Haltung?'],
+            qEN: ['Main question: Is morality defined by universal laws, outcomes, or intrinsic virtue?']
+        },
+        {
+            id: 19,
+            isActive: false,
+            cat: 'ethics',
+            catDE: 'Ethik & Moral',
+            catEN: 'Ethics & Morality',
+            sessionDE: 'EDITION 04 | WOCHE 55–57',
+            sessionEN: 'EDITION 04 | WEEK 55–57',
+            titleDE: 'Ist eine gute Absicht wichtiger als ein gutes Ergebnis?',
+            titleEN: 'Is Good Intent More Important Than a Good Outcome?',
+            qDE: ['Hauptfrage: Beurteilen wir die Moral einer Tat nach ihren Beweggründen oder den Konsequenzen?'],
+            qEN: ['Main question: Should actions be evaluated based on underlying intent or ultimate consequences?']
+        },
+        {
+            id: 20,
+            isActive: false,
+            cat: 'ethics',
+            catDE: 'Ethik & Moral',
+            catEN: 'Ethics & Morality',
+            sessionDE: 'EDITION 04 | WOCHE 58–60',
+            sessionEN: 'EDITION 04 | WEEK 58–60',
+            titleDE: 'Soll jeder eine zweite Chance bekommen?',
+            titleEN: 'Should Everyone Deserve a Second Chance?',
+            qDE: ['Hauptfrage: Wo liegen die Grenzen der Vergebung und gesellschaftlichen Reintegration?'],
+            qEN: ['Main question: What are the ethical limits of forgiveness and social reintegration?']
+        },
+        {
+            id: 21,
+            isActive: false,
+            cat: 'meta',
+            catDE: 'Meta & Führung',
+            catEN: 'Meta & Leadership',
+            sessionDE: 'EDITION 05 | WOCHE 61–63',
+            sessionEN: 'EDITION 05 | WEEK 61–63',
+            titleDE: 'Was macht einen guten Anführer aus?',
+            titleEN: 'What Defines Exceptional Leadership?',
+            qDE: ['Hauptfrage: Ist Führung eine Frage von Autorität, Empathie oder Vision?'],
+            qEN: ['Main question: Does effective leadership rely on authority, empathy, or vision?']
+        },
+        {
+            id: 22,
+            isActive: false,
+            cat: 'meta',
+            catDE: 'Meta & Führung',
+            catEN: 'Meta & Leadership',
+            sessionDE: 'EDITION 05 | WOCHE 64–66',
+            sessionEN: 'EDITION 05 | WEEK 64–66',
+            titleDE: 'Warum vertrauen Menschen bestimmten Personen?',
+            titleEN: 'Why Do People Trust Certain Individuals?',
+            qDE: ['Hauptfrage: Wie entsteht Vertrauen und wie unterscheidet man Glaubwürdigkeit von Manipulation?'],
+            qEN: ['Main question: How is trust built, and how can credibility be distinguished from charisma?']
+        },
+        {
+            id: 23,
+            isActive: false,
+            cat: 'meta',
+            catDE: 'Meta & Führung',
+            catEN: 'Meta & Leadership',
+            sessionDE: 'EDITION 05 | WOCHE 67–69',
+            sessionEN: 'EDITION 05 | WEEK 67–69',
+            titleDE: 'Wie können junge Menschen Veränderung schaffen?',
+            titleEN: 'How Can Youth Drive Systemic Change?',
+            qDE: ['Hauptfrage: Welche Hebel haben Jugendliche, um gesellschaftlichen Wandel aktiv zu gestalten?'],
+            qEN: ['Main question: What leverage points do young people possess to impact social structures?']
+        },
+        {
+            id: 24,
+            isActive: false,
+            cat: 'meta',
+            catDE: 'Meta & Führung',
+            catEN: 'Meta & Leadership',
+            sessionDE: 'EDITION 05 | WOCHE 70–72',
+            sessionEN: 'EDITION 05 | WEEK 70–72',
+            titleDE: 'Was macht eine starke Gemeinschaft aus?',
+            titleEN: 'What Forms the Foundation of a Strong Community?',
+            qDE: ['Hauptfrage: Wie verbindet man individuelle Freiheit mit Verpflichtung gegenüber der Gruppe?'],
+            qEN: ['Main question: How can individual autonomy be balanced with communal duty?']
         }
+    ];
 
-        function filterTopics(e, category) {
-            currentFilter = category;
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            renderTopics();
+    const uiText = {
+        de: {
+            bannerBadge: 'Aktuell in Bearbeitung',
+            bannerText: 'Das Projekt startet am 14. September 2026. Aktuell befindet sich das Projekt in der Vorbereitung.',
+            badge: 'Schülerinitiative & Digitales Archiv',
+            title: 'Erforschung von Mensch, Ethik, Technologie & Zukunft',
+            subtitle: 'Vom interaktiven Dialog im Schulfoyer zu einer langfristigen Wissensplattform für kritische Lebensfragen und Perspektiven.',
+            stat1Val: '25 Themen',
+            stat1Lbl: 'Schul-Workshops',
+            stat2Val: '2 Jahre',
+            stat2Lbl: 'Foyer-Initiative',
+            stat3Val: 'Infinity',
+            stat3Lbl: 'Digitales Archiv',
+            navVision: 'Vision & Phasen',
+            navSyllabus: 'Syllabus & Archiv',
+            navImpressum: 'Impressum',
+            visionTitle: 'Das Projektmodell',
+            visionSubtitle: 'Ein zweistufiger Ansatz: Erst die lokale Debatte vor Ort, dann die globale, nachhaltige Aufarbeitung.',
+            phase1Tag: 'Phase 1: 2026 – 2028',
+            phase1Title: 'Schul-Foyer Initiative',
+            phase1Desc: 'Alle 3 Wochen verwandelt sich das Schulfoyer in einen philosophischen und gesellschaftlichen Resonanzraum. Schülerinnen und Schüler diskutieren spontan über komplexe Fragen zu Psychologie, Werten, Technologie und Ethik – gefördert durch evidenzbasierte Anstöße.',
+            phase2Tag: 'Phase 2: Post-Graduation & Zukunft',
+            phase2Title: 'Perspektiven & Lebensweisheiten Archiv',
+            phase2Desc: 'Nach dem Schulabschluss entwickelt sich diese Webseite zu einem dauerhaften digitalen Wissensarchiv. Ebenso werden weiterhin komplexe Probleme von mir analysiert und die Lösungen für eine breitere Öffentlichkeit zugänglich gemacht.',
+            syllabusTitle: 'Das Themen-Syllabus',
+            syllabusSubtitle: 'Klicke auf ein Thema, um Antworten, wissenschaftliche Hintergründe und Ergebnisse aus dem Schulfoyer einzusehen.',
+            filterAll: 'Alle Themen',
+            filterPsych: 'Psychologie & Denken',
+            filterSoc: 'Gesellschaft & Demokratie',
+            filterTech: 'Technologie & Zukunft',
+            filterEth: 'Ethik & Moral',
+            filterMeta: 'Meta & Führung',
+            footerDesc: 'Eine Initiative zur Förderung intellektueller Neugier, sokratischen Dialogs und langfristiger Reflexion über menschliche Werte.',
+            footerLocTitle: 'Initiative & Archiv',
+            footerLocDesc: 'Gestartet im Schulfoyer | Nachhaltig fortgeführt als digitales Perspektiven-Archiv.',
+            impTitle: 'Impressum',
+            impHeadResp: 'Angaben gemäß § 5 DDG:',
+            impHeadContact: 'Kontakt:',
+            impDisclaimerText: '<strong>Haftung für Inhalte:</strong> Die Inhalte meiner Seite wurden mit größter Sorgfalt erstellt. Für die Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Sollten Fehler oder unvollständige Informationen auffallen, bemühe ich mich, diese zeitnah zu korrigieren.',
+            privacyTitle: 'Datenschutz & Anonymität',
+            privacyDesc: 'Antworten aus Umfragen oder Diskussionen werden ausschließlich anonym ausgewertet und veröffentlicht.',
+            activeBadge: 'Aktuelles Thema',
+            lockedText: 'Demnächst verfügbar',
+            clickToExplore: 'Erkunden & Details ansehen →',
+            modalOverviewTitle: 'Kontext & Perspektive',
+            modalInsightsTitle: 'Kernpunkte & Erkenntnisse',
+            modalQuestionTitle: 'Impulsfrage für Schüler',
+            modalLockedNotice: 'Dieses Thema wird im Rahmen des Schulfoyer-Zyklus freigeschaltet. Besuche diese Seite im Verlauf des Schuljahres erneut, um die Ergebnisse einzusehen!'
+        },
+        en: {
+            bannerBadge: 'Currently in Progress',
+            bannerText: 'The project will launch on September 14, 2026. It is currently under active preparation.',
+            badge: 'Student Initiative & Digital Archive',
+            title: 'Exploring Humanity, Ethics, Technology & the Future',
+            subtitle: 'From interactive discussions in the school foyer to a lasting digital repository for critical philosophical inquiries.',
+            stat1Val: '25 Topics',
+            stat1Lbl: 'School Workshops',
+            stat2Val: '2 Years',
+            stat2Lbl: 'Foyer Initiative',
+            stat3Val: 'Infinity',
+            stat3Lbl: 'Digital Archive',
+            navVision: 'Vision & Phases',
+            navSyllabus: 'Syllabus & Archive',
+            navImpressum: 'Legal Notice',
+            visionTitle: 'The Project Framework',
+            visionSubtitle: 'A two-stage approach: Local discussions on campus followed by long-term digital documentation.',
+            phase1Tag: 'Phase 1: 2026 – 2028',
+            phase1Title: 'Foyer Dialogue Initiative',
+            phase1Desc: 'Every 3 weeks, the school foyer turns into a hub for intellectual debate. Students spontaneously explore complex questions on psychology, ethics, and technology guided by evidence-backed prompts.',
+            phase2Tag: 'Phase 2: Post-Graduation & Beyond',
+            phase2Title: 'Wisdom & Perspective Archive',
+            phase2Desc: 'Following graduation, this web application evolves into an enduring knowledge archive. Complex societal issues will continue to be analyzed and made accessible for a wider audience.',
+            syllabusTitle: 'Curriculum & Syllabus',
+            syllabusSubtitle: 'Click on a topic to view answers, scientific context, and discussion outcomes from the foyer workshops.',
+            filterAll: 'All Topics',
+            filterPsych: 'Psychology & Cognition',
+            filterSoc: 'Society & Democracy',
+            filterTech: 'Technology & Future',
+            filterEth: 'Ethics & Morality',
+            filterMeta: 'Meta & Leadership',
+            footerDesc: 'An initiative dedicated to cultivating intellectual curiosity, Socratic dialogue, and deep reflection on human values.',
+            footerLocTitle: 'Initiative & Archive',
+            footerLocDesc: 'Launched on campus | Continued as a permanent digital archive.',
+            impTitle: 'Legal Notice (Impressum)',
+            impHeadResp: 'Information according to § 5 DDG:',
+            impHeadContact: 'Contact:',
+            impDisclaimerText: '<strong>Liability for Content:</strong> Content has been created with utmost care. However, no liability can be assumed for completeness or timeliness. Corrections will be promptly applied upon notification.',
+            privacyTitle: 'Data Privacy & Anonymity',
+            privacyDesc: 'Survey and discussion responses are evaluated and published exclusively in anonymous form.',
+            activeBadge: 'Current Topic',
+            lockedText: 'Coming Soon',
+            clickToExplore: 'Explore & View Details →',
+            modalOverviewTitle: 'Context & Perspective',
+            modalInsightsTitle: 'Key Takeaways & Insights',
+            modalQuestionTitle: 'Prompt Question for Students',
+            modalLockedNotice: 'This topic will be unlocked as part of the school foyer cycle. Re-visit this archive during the school year to explore student perspectives and results!'
         }
+    };
 
-        function renderTopics() {
-            const grid = document.getElementById('topics-grid');
-            grid.innerHTML = '';
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 
-            const filtered = currentFilter === 'all' 
-                ? topicsData 
-                : topicsData.filter(item => item.cat === currentFilter);
+        const t = uiText[lang];
+        document.getElementById('banner-badge').innerText = t.bannerBadge;
+        document.getElementById('banner-text').innerText = t.bannerText;
+        document.getElementById('hero-badge').innerText = t.badge;
+        document.getElementById('hero-title').innerText = t.title;
+        document.getElementById('hero-subtitle').innerText = t.subtitle;
+        document.getElementById('stat-1-val').innerText = t.stat1Val;
+        document.getElementById('stat-1-lbl').innerText = t.stat1Lbl;
+        document.getElementById('stat-2-val').innerText = t.stat2Val;
+        document.getElementById('stat-2-lbl').innerText = t.stat2Lbl;
+        document.getElementById('stat-3-val').innerText = t.stat3Val;
+        document.getElementById('stat-3-lbl').innerText = t.stat3Lbl;
 
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'topic-card';
+        document.getElementById('nav-vision').innerText = t.navVision;
+        document.getElementById('nav-syllabus').innerText = t.navSyllabus;
+        document.getElementById('nav-impressum').innerText = t.navImpressum;
+        document.getElementById('vision-title').innerText = t.visionTitle;
+        document.getElementById('vision-subtitle').innerText = t.visionSubtitle;
+        document.getElementById('phase1-tag').innerText = t.phase1Tag;
+        document.getElementById('phase1-title').innerText = t.phase1Title;
+        document.getElementById('phase1-desc').innerText = t.phase1Desc;
+        document.getElementById('phase2-tag').innerText = t.phase2Tag;
+        document.getElementById('phase2-title').innerText = t.phase2Title;
+        document.getElementById('phase2-desc').innerText = t.phase2Desc;
+        document.getElementById('syllabus-title').innerText = t.syllabusTitle;
+        document.getElementById('syllabus-subtitle').innerText = t.syllabusSubtitle;
+        document.getElementById('filter-all').innerText = t.filterAll;
+        document.getElementById('filter-psych').innerText = t.filterPsych;
+        document.getElementById('filter-soc').innerText = t.filterSoc;
+        document.getElementById('filter-tech').innerText = t.filterTech;
+        document.getElementById('filter-eth').innerText = t.filterEth;
+        document.getElementById('filter-meta').innerText = t.filterMeta;
+        document.getElementById('footer-desc').innerText = t.footerDesc;
+        document.getElementById('footer-loc-title').innerText = t.footerLocTitle;
+        document.getElementById('footer-loc-desc').innerText = t.footerLocDesc;
+        document.getElementById('imp-title').innerText = t.impTitle;
+        document.getElementById('imp-head-responsible').innerText = t.impHeadResp;
+        document.getElementById('imp-head-contact').innerText = t.impHeadContact;
+        document.getElementById('imp-disclaimer-text').innerHTML = t.impDisclaimerText;
+        document.getElementById('privacy-title').innerText = t.privacyTitle;
+        document.getElementById('privacy-desc').innerText = t.privacyDesc;
 
-                const catLabel = currentLang === 'de' ? item.catDE : item.catEN;
-                const sessionLabel = currentLang === 'de' ? item.sessionDE : item.sessionEN;
-                const title = currentLang === 'de' ? item.titleDE : item.titleEN;
-                const questions = currentLang === 'de' ? item.qDE : item.qEN;
-
-                let qListHtml = '';
-                questions.forEach(q => {
-                    qListHtml += `<li>${q}</li>`;
-                });
-
-                card.innerHTML = `
-                    <div>
-                        <div class="topic-meta">
-                            <span class="category-tag">${catLabel}</span>
-                            <span class="session-num">${sessionLabel}</span>
-                        </div>
-                        <h3>${title}</h3>
-                        <ul class="questions-list">
-                            ${qListHtml}
-                        </ul>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Initial render
         renderTopics();
-    </script>
-</body>
-</html>
+    }
+
+    function filterTopics(e, category) {
+        currentFilter = category;
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        renderTopics();
+    }
+
+    function renderTopics() {
+        const grid = document.getElementById('topics-grid');
+        grid.innerHTML = '';
+
+        const filtered = currentFilter === 'all' 
+            ? topicsData 
+            : topicsData.filter(item => item.cat === currentFilter);
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = `topic-card ${item.isActive ? 'active-topic' : ''}`;
+            card.onclick = () => openModal(item.id);
+
+            const catLabel = currentLang === 'de' ? item.catDE : item.catEN;
+            const sessionLabel = currentLang === 'de' ? item.sessionDE : item.sessionEN;
+            const title = currentLang === 'de' ? item.titleDE : item.titleEN;
+            const questions = currentLang === 'de' ? item.qDE : item.qEN;
+            const t = uiText[currentLang];
+
+            let activeBadgeHtml = item.isActive ? `<span class="active-pill">${t.activeBadge}</span>` : '';
+            let statusFooter = item.isActive 
+                ? `<span style="color: var(--primary-crimson);">${t.clickToExplore}</span>` 
+                : `<span class="locked-pill">🔒 ${t.lockedText}</span>`;
+
+            let qListHtml = '';
+            questions.forEach(q => {
+                qListHtml += `<li>${q}</li>`;
+            });
+
+            card.innerHTML = `
+                ${activeBadgeHtml}
+                <div>
+                    <div class="topic-meta">
+                        <span class="category-tag">${catLabel}</span>
+                        <span class="session-num">${sessionLabel}</span>
+                    </div>
+                    <h3>${title}</h3>
+                    <ul class="questions-list">
+                        ${qListHtml}
+                    </ul>
+                </div>
+                <div class="card-footer-action">
+                    ${statusFooter}
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function openModal(topicId) {
+        const item = topicsData.find(t => t.id === topicId);
+        if (!item) return;
+
+        const t = uiText[currentLang];
+        const catLabel = currentLang === 'de' ? item.catDE : item.catEN;
+        const sessionLabel = currentLang === 'de' ? item.sessionDE : item.sessionEN;
+        const title = currentLang === 'de' ? item.titleDE : item.titleEN;
+
+        document.getElementById('modal-cat').innerText = catLabel;
+        document.getElementById('modal-session').innerText = sessionLabel;
+        document.getElementById('modal-title').innerText = title;
+
+        const contentContainer = document.getElementById('modal-body-content');
+
+        if (item.isActive && item.detailDE) {
+            const detail = currentLang === 'de' ? item.detailDE : item.detailEN;
+            
+            let insightsHtml = '';
+            detail.insights.forEach(ins => {
+                insightsHtml += `<li>${ins}</li>`;
+            });
+
+            contentContainer.innerHTML = `
+                <div class="modal-section">
+                    <h4>🔍 ${t.modalOverviewTitle}</h4>
+                    <p>${detail.overview}</p>
+                </div>
+                <div class="modal-section">
+                    <h4>💡 ${t.modalInsightsTitle}</h4>
+                    <ul>${insightsHtml}</ul>
+                </div>
+                <div class="modal-section">
+                    <h4>❓ ${t.modalQuestionTitle}</h4>
+                    <div class="perspective-box">
+                        <p><em>"${detail.question}"</em></p>
+                    </div>
+                </div>
+            `;
+        } else {
+            contentContainer.innerHTML = `
+                <div class="modal-section" style="text-align: center; padding: 20px 0;">
+                    <span style="font-size: 40px; display: block; margin-bottom: 15px;">🔒</span>
+                    <h4>${t.lockedText}</h4>
+                    <p style="margin-top: 10px;">${t.modalLockedNotice}</p>
+                </div>
+            `;
+        }
+
+        document.getElementById('topic-modal').classList.add('open');
+    }
+
+    function closeModal() {
+        document.getElementById('topic-modal').classList.remove('open');
+    }
+
+    // Close Modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('topic-modal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+
+    // Initial render
+    renderTopics();
+</script>
